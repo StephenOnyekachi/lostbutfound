@@ -1,0 +1,58 @@
+
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mail</title>
+    <style>
+        * {
+            padding: 0px;
+            margin: 0px;
+            box-sizing: border-box;
+            font-family: 'Arial Narrow Bold', sans-serif;
+        }
+    </style>
+</head>
+<body style="background-color: rgb(201, 201, 201); color: black;">
+    
+    <div style="padding: 10px; padding-top: 10px; padding-bottom: 10px; height: 85vh; align-content: center; overflow-y: scroll;">
+
+        <h3>
+            {{ subject }}
+        </h3>
+        <h2 style="padding-top: 5px; padding-bottom: 5px; text-transform: capitalize;">
+            {{ name }}
+        </h2>
+        <p style="padding-top: 5px; padding-bottom: 5px;">
+            {{ note }}
+        </p>
+    </div>
+
+    <div style="background-color: rgb(29, 29, 29); padding: 20px;">
+        <div style="display: flex; align-items: center; justify-content: center; padding: 5px;">
+            <h3 style="color: rgb(230, 230, 230); text-transform: uppercase;">
+                lost but found items
+            </h3>
+        </div>
+        <div style="display: flex; align-items: center; justify-content: center; padding: 5px;">
+            <h3 style="color: rgb(230, 230, 230); text-transform: uppercase;">
+                +234 9031 360 947
+            </h3>
+        </div>
+        <div style="display: flex; align-items: center; justify-content: center; padding: 5px;">
+            <p
+                style="color: rgb(230, 230, 230); text-transform: capitalize;"
+            >
+                &copy;
+                <script>
+                    document.write(new Date().getFullYear())
+                </script> 
+                Stephen Onyekachi. All rights reserved
+            </p>
+        </div>
+    </div>
+
+</body>
+</html>

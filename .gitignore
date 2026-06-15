@@ -1,0 +1,32 @@
+
+# Python
+*.pyc
+__pycache__/
+*.pyo
+*.pyd
+*.pdb
+*.egg
+*.egg-info/
+dist/
+build/
+
+# Virtual environment
+venv/
+.env
+env
+
+# Django
+db.sqlite3
+media/
+staticfiles/
+
+# Logs
+debug.log
+*.log
+
+# Node modules
+static/node_modules/
+
+# VS Code
+.vscode/
+

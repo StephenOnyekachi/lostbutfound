@@ -1,0 +1,139 @@
+
+
+{% extends 'base/head.html' %}
+{% load static %}
+{% load humanize %}
+{% block content %}
+
+
+<!-- for nave -->
+{% include 'base/usersnav.html' %}
+
+
+<div class="bg-white h-[100vh] md:h-screen">
+
+    <div class="flex flex-col-reverse md:flex-row items-center justify-center h-250 gap-10 p-10 md:p-2">
+        <div class="max-w-xl">
+            <h1 class="text-4xl md:text-6-xl font-bold leading-tight uppercase
+                bg-gradient-to-r from-blue-600 to-black bg-clip-text text-transparent
+            ">
+                {{ profile.org.orgname }}
+            </h1>
+            <p class="text-blue-900 mt-5 text-lg capitalize">
+                renew your payment with lost but found items
+            </p>
+            <p class="text-blue-300 mt-1 text capitalize">
+                scrow down to view plans
+            </p>
+        </div>
+        <div class="w-full md:w-[250px]">
+            <img 
+                src="{% static 'images/pay.png' %}" 
+                alt="image"
+                class="w-full object-contain"
+            >
+        </div>
+    </div>
+
+</div>
+
+<div class="px-5 py-10 md:px-6 md:py-8 absolute w-full mt-15 md:mt-18">
+    <div>
+        <div class="flex items-center justify-center px-2 pt-10 pb-5 w-full text-blue-500">
+            <i class="fa fa-money"></i>
+            <h3 class="ml-3 font-bold uppercase">
+                all plans
+            </h3>
+        </div>
+    </div>
+    <div class="flex flex-wrap justify-center gap-8 items-stretch">
+        <div class="bg-gray-200 w-80 p-5 rounded m-2 shadow zoom-in">
+            <h3 class="font-bold text-blue-500">
+                {{ plan1.name }}
+            </h3>
+            <i class="font-bold text-blue-500">
+                ${{ plan1.amount }} Free / Trial (14 days)
+            </i>
+            <p class="text-blue-900 py-2">
+                Perfect for small organizations or testing the platform.
+            </p>
+            <p class="font-bold text-blue-500 py-2">
+                Includes:
+            </p>
+            <ul class="space-y-3 text-gray-700">
+                <li>✓ Up to 50 items</li>
+                <li>✓ Basic search functionality</li>
+                <li>✓ Simple reporting system</li>
+                <li>✓ Standard support</li>
+            </ul>
+
+            <div class="py-2">
+                <a href="#"
+                    class="bg-blue-600 text-white text-xs p-2 uppercase font-semibold rounded">
+                    Get Started Free
+                </a>
+            </div>
+        </div>
+        <div class="bg-gray-200 w-80 p-5 rounded m-2 shadow zoom-in">
+            <h3 class="font-bold text-blue-500">
+                ${{ plan2.name }}
+            </h3>
+            <i class="font-bold text-blue-500">
+                ${{ plan2.amount }} / month
+            </i>
+            <p class="text-blue-900 py-2">
+                Best for schools, churches, SMEs, and growing organizations.
+            </p>
+            <p class="font-bold text-blue-500 py-2">
+                Includes everything in Starter plus:
+            </p>
+            <ul class="space-y-3 text-gray-700">
+                <li>✓ Unlimited items</li>
+                <li>✓ Advanced search & filtering</li>
+                <li>✓ Organization dashboard access</li>
+                <li>✓ Email notifications</li>
+                <li>✓ Claim verification system</li>
+                <li>✓ Priority support</li>
+            </ul>
+
+            <div class="py-2">
+                <a href="#"
+                    class="bg-blue-600 text-white text-xs p-2 uppercase font-semibold rounded">
+                    Upgrade to Pro
+                </a>
+            </div>
+        </div>
+        <div class="bg-gray-200 w-80 p-5 rounded m-2 shadow zoom-in">
+            <h3 class="font-bold text-blue-500">
+                ${{ plan3.name }}
+            </h3>
+            <i class="font-bold text-blue-500">
+                ${{ plan3.amount }} / month
+            </i>
+            <p class="text-blue-900 py-2">
+                Designed for universities, airports, large estates, and transport systems.
+            </p>
+            <p class="font-bold text-blue-500 py-2">
+                Includes:
+            </p>
+            <ul class="space-y-3 text-gray-700">
+                <li>✓ Multi-branch organization support</li>
+                <li>✓ Advanced analytics dashboard</li>
+                <li>✓ API access for integrations</li>
+                <li>✓ Custom branding (your domain/subdomain)</li>
+                <li>✓ Dedicated account manager</li>
+                <li>✓ SLA support</li>
+            </ul>
+
+            <div class="py-2">
+                <a href="#"
+                    class="bg-blue-600 text-white text-xs p-2 uppercase font-semibold rounded">
+                    Contact Sales
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+{% endblock %}

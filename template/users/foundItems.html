@@ -1,0 +1,103 @@
+
+
+{% extends 'base/head.html' %}
+{% load static %}
+{% load humanize %}
+{% block content %}
+
+
+<!-- for nave -->
+{% include 'base/usersnav.html' %}
+
+
+<div class="px-5 py-10 md:px-6 md:py-8 absolute w-full mt-15 md:mt-18">
+
+    <div>
+
+        <div class="flex items-center px-2 pt-5 pb-2 w-full text-blue-500">
+            <i class="fa fa-cubes"></i>
+            <h3 class="ml-3 font-bold uppercase">
+                all items ({{ items.count | intcomma }})
+            </h3>
+        </div>
+
+        {% if items %}
+
+        {% for item in items %}
+
+        <div 
+            class="w-full rounded shadow p-1 my-2"
+        >
+            <div class="md:flex">
+                <a href="{{ item.picture.url }}">
+                    <img 
+                        src="{{ item.picture.url }}" 
+                        alt="item image"
+                        class="w-[100px] object-contain pr-3
+                        md:w-[200px] md:object-contain rounded"
+                    >
+                </a>
+                <div class="w-full">
+                    <h1 class="text-1xl font-bold text-blue-600 capitalize">
+                        {{ item.name }}
+                    </h1>
+                    <p class="text-xs text-blue-400 capitalize">
+                        <b class="text-blue-600">Found Location:</b> {{ item.location_found }}
+                    </p>
+                    <p class="text-xs text-blue-400 capitalize">
+                        {{ item.description }}
+                    </p>
+                    <small class="text-gray-500 text-[10px]">POSTED ON: {{ item.date_posted }}</small><br>
+                    <small class="text-gray-500 text-[10px]">ITEM CATEGORY: {{ item.category }}</small><br>
+                    <small class="text-gray-500 text-[10px]">ITEM STATUS: {{ item.status }}</small><br>
+                    <small class="text-gray-500 text-[10px]">ITEM ID: {{ item.item_id }}</small><br>
+                </div>
+            </div>
+            <div class="py-2">
+                
+                {% if profile.role == 'admin' %}
+                
+                <a href="{% url 'deleteitem' item.id %}" 
+                    class="font-lighter capitalize bg-red-500 rounded p-1 text-white text-[12px] mr-1"
+                >
+                    delete
+                </a>
+
+                {% endif %}
+                
+                <a href="{% url 'claimitem' item.id %}" 
+                    class="font-lighter capitalize bg-green-500 rounded p-1 text-white text-[12px] mr-1"
+                >
+                    claim item
+                </a>
+            </div>
+        </div>
+
+        {% endfor %}
+
+        {% else %}
+
+        <div 
+            class="w-full rounded shadow p-1 my-2"
+        >
+            <div class="flex items-center">
+                <div class="p-10">
+                    <i class="fa fa-cubes text-gray-300"></i>
+                </div>
+                <div class="w-full">
+                    <h1 class="text-1xl font-bold text-gray-600 capitalize">
+                        no item record found
+                    </h1>
+                </div>
+            </div>
+        </div>
+
+        {% endif %}
+        
+    </div>
+
+</div>
+
+
+{% endblock %}
+

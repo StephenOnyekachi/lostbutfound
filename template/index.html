@@ -1,0 +1,302 @@
+
+
+{% extends 'base/head.html' %}
+{% load static %}
+{% block content %}
+
+
+<div class="bg-white h-[100vh] md:h-screen">
+    <div class="flex flex-col-reverse md:flex-row items-center justify-center h-140 gap-10 p-10 md:p-2">
+        <div class="max-w-xl">
+            <h1 class="text-3xl md:text-6-xl font-bold leading-tight uppercase
+                bg-gradient-to-r from-blue-600 to-black bg-clip-text text-transparent
+            ">
+                lost but found items
+            </h1>
+            <p class="text-blue-900 mt-1 text capitalize pt-2">
+                Whether you run a school, church, company, estate, or transport system, our platform 
+                gives you full control over lost and found reports with speed, transparency, and trust.
+            </p>
+            <div
+                class="py-5 flex gap-5"
+            >
+                <a href="{% url 'login' %}" class="text-blue-800 capitalize font-bold">login</a>
+                <a href="{% url 'signup' %}" class="text-blue-800 capitalize font-bold">create organization</a>
+            </div>
+        </div>
+        <div class="w-full md:w-[250px] py-5">
+            <img 
+                src="{% static 'images/img7.png' %}" 
+                alt="image"
+                class="w-full object-contain"
+            >
+        </div>
+    </div>
+
+</div>
+
+<div class="bg-gray-200 py-15 px-5">
+
+    <div class="flex flex-wrap gap-5 px-5 py-10 items-center justify-center">
+        <div class="max-w-xl slideleft">
+            <h3 class="text-2xl md:text-6-xl font-bold leading-tight capitalize
+                bg-gradient-to-r from-blue-600 to-black bg-clip-text text-transparent
+            ">
+                about
+            </h3>
+            <h3 class="text-1xl md:text-6-xl font-bold leading-tight capitalize
+                bg-gradient-to-r from-blue-600 to-black bg-clip-text text-transparent
+            ">
+                lost but found items
+            </h3>
+        </div>
+        <div class="max-w-xl">
+            <p class="text-blue-900 font-semibold py-2 zoom-in">
+                Lost but Found Items was created for the purpose of helping 
+                an registered organizations to help their members 
+                find their missing items withen their premises.
+            </p>
+            <p class="text-blue-900 font-semibold py-2 zoom-in">
+                Lost but found items is SaaS(Software as a service) software, 
+                which means It is a subscription-based SaaS platform for 
+                organizations to manage lost and found items efficiently.
+            </p>
+        </div>
+    </div>
+
+    <div class="flex flex-wrap gap-5 px-5 py-10 items-center justify-center">
+        <div class="max-w-xl slideleft">
+            <h3 class="text-2xl md:text-6-xl font-bold leading-tight capitalize
+                bg-gradient-to-r from-blue-600 to-black bg-clip-text text-transparent
+            ">
+                how it works
+            </h3>
+            <h3 class="text-1xl md:text-6-xl font-bold leading-tight capitalize
+                bg-gradient-to-r from-blue-600 to-black bg-clip-text text-transparent
+            ">
+                and benefits
+            </h3>
+        </div>
+        <div class="max-w-xl">
+            <p class="text-blue-900 font-semibold py-2 zoom-in">
+                <i class="text-3xl font-bold text-blue-900">1_</i>
+                Register your organization with Lost but found items.
+            </p>
+            <p class="text-blue-900 font-semibold py-2 zoom-in">
+                <i class="text-3xl font-bold text-blue-900">2_</i>
+                Gain access for a month after registration from Lost but found items.
+            </p>
+            <p class="text-blue-900 font-semibold py-2 zoom-in">
+                <i class="text-3xl font-bold text-blue-900">3_</i>
+                Free subdomain from Lost but found items.
+            </p>
+        </div>
+    </div>
+
+</div>
+
+<div class="py-10 px-5">
+    
+    <div class="flex flex-col items-center justify-center">
+        <h3 class="text-2xl md:text-6-xl font-bold leading-tight capitalize
+            bg-gradient-to-r from-blue-600 to-black bg-clip-text text-transparent
+        ">
+            how it works
+        </h3>
+        <h3 class="text-1xl md:text-6-xl font-bold leading-tight capitalize
+            bg-gradient-to-r from-blue-600 to-black bg-clip-text text-transparent
+        ">
+            and benefits
+        </h3>
+        <div class="flex flex-col items-center justify-center text-blue-900 font-semibold py-2 zoom-in">
+            <p>
+                Everything You Need to Manage Lost & Found Items
+            </p>
+            <p>
+                A powerful, simple, and scalable system designed 
+                for organizations that want to improve item recovery and user experience.
+            </p>
+        </div>
+    </div>
+    <div class="flex flex-wrap gap-5 px-2 py-5 items-stretch">
+        <div class="w-90 p-5 rounded shadow">
+            <h3 class="font-bold text-blue-500 slideleft">
+                Smart Item Management
+            </h3>
+            <p class="text-blue-900 py-2 zoom-in">
+                Easily report, track, and manage lost and found 
+                items in real time with a clean dashboard.
+            </p>
+        </div>
+        <div class="w-90 p-5 rounded shadow">
+            <h3 class="font-bold text-blue-500 slideleft">
+                AI Matching (Coming Soon)
+            </h3>
+            <p class="text-blue-900 py-2 zoom-in">
+                Our system will intelligently match lost items with found items using image 
+                recognition and description similarity to improve recovery speed.
+            </p>
+        </div>
+        <div class="w-90 p-5 rounded shadow">
+            <h3 class="font-bold text-blue-500 slideleft">
+                Organization Dashboard
+            </h3>
+            <p class="text-blue-900 py-2 zoom-in">
+                Each organization gets a dedicated dashboard to:
+            </p>
+            <p class="text-blue-900 py-2 zoom-in">
+                Manage users and reports
+                Track all lost and found items
+                Monitor recovery performance
+                Control access and permissions
+            </p>
+        </div>
+        <div class="w-90 p-5 rounded shadow">
+            <h3 class="font-bold text-blue-500 slideleft">
+                Instant Notifications
+            </h3>
+            <p class="text-blue-900 py-2 zoom-in">
+                Users get notified immediately when:
+            </p>
+            <p class="text-blue-900 py-2 zoom-in">
+                A matching item is found
+                A claim is approved or rejected
+                New items are posted in their organization
+            </p>
+        </div>
+        <div class="w-90 p-5 rounded shadow">
+            <h3 class="font-bold text-blue-500">
+                Secure Claims System
+            </h3>
+            <p class="text-blue-900 py-2 zoom-in">
+                A verification process ensures only the rightful owner can claim an item. 
+                This prevents fraud and increases trust within the system.
+            </p>
+        </div>
+        <div class="w-90 p-5 rounded shadow">
+            <h3 class="font-bold text-blue-500">
+                Analytics & Reporting (Optional Upgrade Feature)
+            </h3>
+            <p class="text-blue-900 py-2 zoom-in">
+                Track:
+            </p>
+            <p class="text-blue-900 py-2 zoom-in">
+                Total lost vs found items
+                Recovery rate
+                Active users
+                Organization performance
+            </p>
+        </div>
+    </div>
+
+</div>
+
+<div class="bg-blue-200 py-10 px-5">
+    
+    <div class="flex flex-col items-center justify-center">
+        <h3 class="text-2xl md:text-6-xl font-bold leading-tight capitalize
+            bg-gradient-to-r from-blue-600 to-black bg-clip-text text-transparent
+        ">
+            Simple Pricing for Every Organization
+        </h3>
+        <div class="flex flex-col items-center justify-center text-blue-900 font-semibold py-2 zoom-in">
+            <p>
+                Choose a plan that fits your organization. Upgrade anytime as your needs grow.
+            </p>
+        </div>
+    </div>
+    <div class="flex flex-wrap justify-center gap-8 items-stretch">
+        <div class="bg-gray-200 w-80 p-5 rounded m-2 shadow zoom-in">
+            <h3 class="font-bold text-blue-500">
+                {{ plan1.name }}
+            </h3>
+            <i class="font-bold text-blue-500">
+                ${{ plan1.amount }} Free / Trial (14 days)
+            </i>
+            <p class="text-blue-900 py-2">
+                Perfect for small organizations or testing the platform.
+            </p>
+            <p class="font-bold text-blue-500 py-2">
+                Includes:
+            </p>
+            <ul class="space-y-3 text-gray-700">
+                <li>✓ Up to 50 items</li>
+                <li>✓ Basic search functionality</li>
+                <li>✓ Simple reporting system</li>
+                <li>✓ Standard support</li>
+            </ul>
+
+            <div class="py-2">
+                <a href="#"
+                    class="bg-blue-600 text-white text-xs p-2 uppercase font-semibold rounded">
+                    Get Started Free
+                </a>
+            </div>
+        </div>
+        <div class="bg-gray-200 w-80 p-5 rounded m-2 shadow zoom-in">
+            <h3 class="font-bold text-blue-500">
+                {{ plan2.name }}
+            </h3>
+            <i class="font-bold text-blue-500">
+                ${{ plan2.amount }} / month
+            </i>
+            <p class="text-blue-900 py-2">
+                Best for schools, churches, SMEs, and growing organizations.
+            </p>
+            <p class="font-bold text-blue-500 py-2">
+                Includes everything in Starter plus:
+            </p>
+            <ul class="space-y-3 text-gray-700">
+                <li>✓ Unlimited items</li>
+                <li>✓ Advanced search & filtering</li>
+                <li>✓ Organization dashboard access</li>
+                <li>✓ Email notifications</li>
+                <li>✓ Claim verification system</li>
+                <li>✓ Priority support</li>
+            </ul>
+
+            <div class="py-2">
+                <a href="#"
+                    class="bg-blue-600 text-white text-xs p-2 uppercase font-semibold rounded">
+                    Upgrade to Pro
+                </a>
+            </div>
+        </div>
+        <div class="bg-gray-200 w-80 p-5 rounded m-2 shadow zoom-in">
+            <h3 class="font-bold text-blue-500">
+                {{ plan3.name }}
+            </h3>
+            <i class="font-bold text-blue-500">
+                ${{ plan3.amount }} / month
+            </i>
+            <p class="text-blue-900 py-2">
+                Designed for universities, airports, large estates, and transport systems.
+            </p>
+            <p class="font-bold text-blue-500 py-2">
+                Includes:
+            </p>
+            <ul class="space-y-3 text-gray-700">
+                <li>✓ Multi-branch organization support</li>
+                <li>✓ Advanced analytics dashboard</li>
+                <li>✓ API access for integrations</li>
+                <li>✓ Custom branding (your domain/subdomain)</li>
+                <li>✓ Dedicated account manager</li>
+                <li>✓ SLA support</li>
+            </ul>
+
+            <div class="py-2">
+                <a href="#"
+                    class="bg-blue-600 text-white text-xs p-2 uppercase font-semibold rounded">
+                    Contact Sales
+                </a>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+<!-- for footer -->
+{% include 'base/footer.html' %}
+
+
+{% endblock %}

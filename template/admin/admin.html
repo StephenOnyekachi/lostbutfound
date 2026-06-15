@@ -1,0 +1,327 @@
+
+
+{% extends 'base/head.html' %}
+{% load static %}
+{% load humanize %}
+{% block content %}
+
+
+<!-- for nave -->
+{% include 'base/adminnav.html' %}
+
+
+<div class="px-5 py-10 md:px-6 md:py-8 absolute w-full mt-15 md:mt-18">
+
+    <div class="w-full md:flex md:flex-wrap gap-3 justify-between">
+        <a href="{% url 'activeorg' %}" class="m-1 md:m-0">
+            <div 
+                class="bg-gradient-to-br from-blue-400 to-blue-900 rounded flex flex-wrap 
+                items-center w-full md:w-[282px] p-5 shadow md:h-40"
+            >
+                <div class="flex items-center pb-2 w-full">
+                    <i class="fa fa-building text-blue-400 p-3 bg-white rounded"></i>
+                    <h3 class="ml-3 text-white font-bold uppercase text-[14px] md:text-[16px]">
+                        active organizations
+                    </h3>
+                </div>
+                <div class="w-full">
+                    <h2 class="text-white uppercase text-[2rem]">
+                        {{ activeorg.count }}
+                    </h2>
+                    <p class="text-gray-300 font-lighter capitalize">
+                        view organizations
+                    </p>
+                </div>
+            </div>
+        </a>
+        <a href="{% url 'inactiveorg' %}" class="m-1 md:m-0">
+            <div 
+                class="bg-gradient-to-br from-blue-400 to-blue-900 rounded flex flex-wrap
+                items-center w-full md:w-[282px] p-5 shadow md:h-40"
+            >
+                <div class="flex items-center pb-2 w-full">
+                    <i class="fa fa-building text-blue-400 p-3 bg-white rounded"></i>
+                    <h3 class="ml-3 text-white font-bold uppercase text-[14px] md:text-[16px]">
+                        inactive organizations
+                    </h3>
+                </div>
+                <div class="w-full">
+                    <h2 class="text-white uppercase text-[2rem]">
+                        {{ inactiveorg.count }}
+                    </h2>
+                    <p class="text-gray-300 font-lighter capitalize">
+                        view organizations
+                    </p>
+                </div>
+            </div>
+        </a>
+        <a href="{% url 'suspendedorg' %}" class="m-1 md:m-0">
+            <div 
+                class="bg-gradient-to-br from-blue-400 to-blue-900 rounded flex flex-wrap
+                items-center w-full md:w-[282px] p-5 shadow md:h-40"
+            >
+                <div class="flex items-center pb-2 w-full">
+                    <i class="fa fa-building text-blue-400 p-3 bg-white rounded"></i>
+                    <h3 class="ml-3 text-white font-bold uppercase text-[14px] md:text-[16px]">
+                        suspended organizations
+                    </h3>
+                </div>
+                <div class="w-full">
+                    <h2 class="text-white uppercase text-[2rem]">
+                        {{ suspended.count }}
+                    </h2>
+                    <p class="text-gray-300 font-lighter capitalize">
+                        view organizations
+                    </p>
+                </div>
+            </div>
+        </a>
+        <a href="{% url 'generalemail' %}" class="m-1 md:m-0">
+            <div 
+                class="bg-gradient-to-br from-blue-400 to-blue-900 rounded flex flex-wrap
+                items-center w-full md:w-[282px] p-5 shadow md:h-40"
+            >
+                <div class="flex items-center pb-2 w-full">
+                    <i class="fa fa-envelope text-blue-400 p-3 bg-white rounded"></i>
+                    <h3 class="ml-3 text-white font-bold uppercase text-[14px] md:text-[16px]">
+                        mail all organizations
+                    </h3>
+                </div>
+                <div class="w-full">
+                    <h2 class="text-white uppercase text-[2rem]">
+                        <!-- {{ suspended.count }} -->
+                    </h2>
+                    <p class="text-gray-300 font-lighter capitalize">
+                        send mail
+                    </p>
+                </div>
+            </div>
+        </a>
+    </div>
+    
+    <div class="mt-5">
+        <form action="" 
+            method="post"
+            enctype="multipart/form-data"
+            class="flex my-2 border-1 border-blue-900 rounded w-full"
+        >
+
+            {% csrf_token %}
+
+            <input type="text"
+                placeholder="Search"
+                name="query"
+                class="w-full px-2 text-blue-900 outline-none"
+            > 
+            <button type="submit"
+                class="bg-blue-900 text-white px-2 py-3 outline-none border-none"
+                name="orgs"
+            >
+                Search
+            </button>
+        </form>
+    </div>
+    
+    <div>
+        <div class="flex items-center px-2 pt-5 pb-2 w-full text-blue-500">
+            <i class="fa fa-building"></i>
+            <h3 class="ml-3 font-bold uppercase">
+                {{ allorg.count }} organization <i class="capitalize">(all)</i>
+            </h3>
+        </div>
+
+        {% if query %}
+
+        {% for profile in query %}
+
+        <div 
+            class="w-full rounded shadow p-2 my-2"
+        >
+            <div class="md:flex">
+                <a href="{{ profile.logo.url }}">
+                    <img 
+                        src="{{ profile.logo.url }}" 
+                        alt="item image"
+                        class="w-[100px] object-contain pr-3
+                        md:w-[200px] md:object-contain rounded"
+                    >
+                </a>
+                <div class="w-full">
+                    <h1 class="text-1xl font-bold text-blue-600 capitalize">
+                        {{ profile.orgname }}
+                    </h1>
+                    <p class="text-xs text-blue-400 capitalize">
+                        STATUS: {{ profile.status }}
+                    </p>
+                    <p class="text-xs text-blue-400 capitalize">
+                        PLAN: {{ profile.plan }}
+                    </p>
+                    <small class="text-gray-500 text-[10px]">REGISTERD ON: {{ profile.date_joined }}</small>
+                    <p class="text-xs text-blue-400 capitalize">
+                        FOUNDER: {{ profile.owner }}
+                    </p>
+                    <p class="text-xs text-blue-400 capitalize">
+                        CONTACT: {{ profile.owner_number }}
+                    </p>
+                </div>
+                <div class="py-2 w-[200px]">
+                    <a href="{% url 'admindeleteorg' profile.id %}" 
+                        class="font-lighter capitalize bg-red-500 rounded p-1 text-white text-[12px] mr-1"
+                    >
+                        delete
+                    </a>
+                    <a href="{% url 'emailorg' profile.id %}" 
+                        class="font-lighter capitalize bg-green-500 rounded p-1 text-white text-[12px] mr-1"
+                    >
+                        email
+                    </a>
+                </div>
+            </div>
+            <div class="w-full mt-2">
+                <form action=""
+                    method="post" enctype="multipart/form-data"
+                >
+
+                    {% csrf_token %}
+
+                    <div class="pb-2">
+                        <input type="text" name="id" id="" value="{{ profile.id }}" hidden>
+                        <p class="text-xs text-blue-400 capitalize font-bold">update org status:</p>
+                        <select name="status" id="" required
+                            class="w-full outline-none rounded border-1 border-blue-600 p-1 mb-3 outline-none"
+                        >
+                            <option value="">
+                                Selete Status
+                            </option>
+                            {% for value, label in status %}
+                            <option value="{{ value }}">
+                                {{ label }}
+                            </option>
+                            {% endfor %}
+                        </select>
+                    </div>
+                    <div>
+                        <button
+                            type="submit"
+                            class="w-full font-lighter capitalize bg-blue-600 rounded p-2 text-white text-[12px] mr-1"
+                            name="status"
+                        >
+                            update changes
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+        {% endfor %}
+
+        {% elif allorg %}
+
+        {% for profile in allorg %}
+
+        <div 
+            class="w-full rounded shadow p-2 my-2"
+        >
+            <div class="md:flex">
+                <a href="{{ profile.logo.url }}">
+                    <img 
+                        src="{{ profile.logo.url }}" 
+                        alt="item image"
+                        class="w-[100px] object-contain pr-3
+                        md:w-[200px] md:object-contain rounded"
+                    >
+                </a>
+                <div class="w-full">
+                    <h1 class="text-1xl font-bold text-blue-600 capitalize">
+                        {{ profile.orgname }}
+                    </h1>
+                    <p class="text-xs text-blue-400 capitalize">
+                        STATUS: {{ profile.status }}
+                    </p>
+                    <p class="text-xs text-blue-400 capitalize">
+                        PLAN: {{ profile.plan }}
+                    </p>
+                    <small class="text-gray-500 text-[10px]">REGISTERD ON: {{ profile.date_joined }}</small>
+                    <p class="text-xs text-blue-400 capitalize">
+                        FOUNDER: {{ profile.owner }}
+                    </p>
+                    <p class="text-xs text-blue-400 capitalize">
+                        CONTACT: {{ profile.owner_number }}
+                    </p>
+                </div>
+                <div class="py-2 w-[200px]">
+                    <a href="{% url 'admindeleteorg' profile.id %}" 
+                        class="font-lighter capitalize bg-red-500 rounded p-1 text-white text-[12px] mr-1"
+                    >
+                        delete
+                    </a>
+                    <a href="{% url 'emailorg' profile.id %}" 
+                        class="font-lighter capitalize bg-green-500 rounded p-1 text-white text-[12px] mr-1"
+                    >
+                        email
+                    </a>
+                </div>
+            </div>
+            <div class="w-full mt-2">
+                <form action=""
+                    method="post" enctype="multipart/form-data"
+                >
+
+                    {% csrf_token %}
+
+                    <div class="pb-2">
+                        <input type="number" name="id" id="" value="{{ profile.id }}" hidden>
+                        <p class="text-xs text-blue-400 capitalize font-bold">update org status:</p>
+                        <select name="status" id="" required
+                            class="w-full outline-none rounded border-1 border-blue-600 p-1 mb-3 outline-none"
+                        >
+                            <option value="">
+                                Selete Status
+                            </option>
+                            {% for value, label in status %}
+                            <option value="{{ value }}">
+                                {{ label }}
+                            </option>
+                            {% endfor %}
+                        </select>
+                    </div>
+                    <div>
+                        <button
+                            type="submit"
+                            class="w-full font-lighter capitalize bg-blue-600 rounded p-2 text-white text-[12px] mr-1"
+                            name="update_status"
+                        >
+                            update changes
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+        {% endfor %}
+
+        {% else %}
+
+        <div 
+            class="w-full rounded shadow p-1 my-2"
+        >
+            <div class="flex items-center">
+                <div class="p-10">
+                    <i class="fa fa-building text-gray-300"></i>
+                </div>
+                <div class="w-full">
+                    <h1 class="text-1xl font-bold text-gray-600 capitalize">
+                        no organization found
+                    </h1>
+                </div>
+            </div>
+        </div>
+
+        {% endif %}
+
+    </div>
+
+</div>
+
+
+{% endblock %}

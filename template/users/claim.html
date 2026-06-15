@@ -1,0 +1,139 @@
+
+{% extends 'base/head.html' %}
+{% load static %}
+{% load humanize %}
+{% block content %}
+
+
+<!-- for nave -->
+{% include 'base/usersnav.html' %}
+
+
+<div class="px-5 py-10 md:px-6 md:py-8 absolute w-full mt-15 md:mt-18">
+
+    {% if request.user.is_authenticated %}
+
+    <div class="bg-white h-auto">
+
+        <div class="p-5 md:p-10">
+            <p class="text-2xl text-blue-900 mt-1 text capitalize pt-2">
+                <b>{{ profile.user.username }}</b> you are
+            </p>
+            <h1 class="text-4xl md:text-6-xl font-bold leading-tight uppercase
+                bg-gradient-to-r from-blue-600 to-black bg-clip-text text-transparent
+            ">
+                about to claim an item
+            </h1>
+        </div>
+        
+        <div class="flex flex-col md:flex-row items-center h-auto gap-10 p-5 md:p-10">
+            <div class="py-3 px-3 rounded shadow">
+                <img 
+                    src="{{ item.picture.url }}" 
+                    alt="item image"
+                    class="w-full h-60 object-cover rounded"
+                >
+                <h1 class="text-1xl font-bold text-blue-600 capitalize py-3">
+                    {{ item.name }}
+                </h1>
+                <p class="text-xs text-blue-400 capitalize">
+                    <b class="text-blue-600">Found Location:</b> {{ item.location_found }}
+                </p>
+                <p class="text-xs text-blue-400 capitalize">
+                    {{ item.description }}
+                </p>
+                <small class="text-gray-500 text-[10px]">POSTED ON: {{ item.date_posted }}</small><br>
+                <small class="text-gray-500 text-[10px]">ITEM CATEGORY: {{ item.category }}</small><br>
+                <small class="text-gray-500 text-[10px]">ITEM STATUS: {{ item.status }}</small><br>
+                <small class="text-gray-500 text-[10px]">ITEM ID: {{ item.item_id }}</small><br>
+            </div>
+            <div class="py-3 px-3 rounded shadow w-full md:w-150">
+                <div class="h-auto">
+                    <form action=""
+                        method="post"
+                        enctype="multipart/form-data"
+                        class="flex flex-col"
+                    >
+
+                        {% csrf_token %}
+                        
+                        <label for="" class="text-blue-900 capitalize">Shot note</label>
+                        <textarea name="note" id=""
+                            placeholder="Shot Description" required
+                            class="w-full outline-none rounded border-1 border-blue-900 p-1 pl-2 mb-3 h-40"
+                        ></textarea>
+                        <button type="submit"
+                            class="bg-blue-600 text-white text-xs p-2 uppercase font-semibold rounded"
+                        >
+                            claim
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    {% else %}
+
+    <div class="bg-white h-auto md:h-screen">
+
+        <div class="flex flex-col-reverse md:flex-row items-center justify-center h-auto gap-10 p-10 md:p-2">
+            <div class="max-w-xl pt-15">
+                <h1 class="text-4xl md:text-6-xl font-bold leading-tight uppercase
+                    bg-gradient-to-r from-blue-600 to-black bg-clip-text text-transparent
+                ">
+                    about to claim an item
+                </h1>
+                <p class="text-blue-300 mt-1 text capitalize">
+                    you need to login to claim this item
+                </p>
+                <div
+                    class="py-5 flex flex-col gap-5"
+                >
+                    <div>
+                        <form action="" class="flex flex-col">
+                            <label for="" class="text-blue-900 capitalize">username</label>
+                            <input 
+                                type="text" 
+                                placeholder="Username"
+                                class="w-full outline-none rounded border-1 border-blue-900 p-1 mb-3"
+                            >
+                            <label for="" class="text-blue-900 capitalize">password</label>
+                            <input
+                                type="password" 
+                                placeholder="Password"
+                                class="w-full outline-none rounded border-1 border-blue-900 p-1 mb-3"
+                            >
+                            <button type="submit"
+                                class="bg-blue-600 text-white text-xs p-2 uppercase font-semibold rounded"
+                            >
+                                login
+                            </button>
+                        </form>
+                    </div>
+                </div>
+                <div
+                    class="py-2 flex gap-5"
+                >
+                    <a href="" class="text-red-300 capitalize font-sm">forgetten password</a>
+                </div>
+            </div>
+            <div class="w-full md:w-[250px]">
+                <img 
+                    src="{% static 'images/img7.png' %}" 
+                    alt="image"
+                    class="w-full object-contain"
+                >
+            </div>
+        </div>
+
+    </div>
+
+    {% endif %}
+
+</div>
+
+
+{% endblock %}
+

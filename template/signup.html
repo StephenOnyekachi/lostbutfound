@@ -1,0 +1,164 @@
+
+
+{% extends 'base/head.html' %}
+{% load static %}
+{% block content %}
+
+<div class="p-10">
+    <a href="{% url 'index' %}" 
+        class="text-blue-800 capitalize font-bold text-[12px] border-1 border-blue-800 rounded px-3 py-2"
+    >
+        back home
+    </a>
+</div>
+
+<div class="bg-white h-auto">
+
+    <div class="flex flex-col-reverse md:flex-row items-center justify-center h-auto gap-10 p-10 md:p-2">
+        <div class="max-w-xl pt-10">
+            <h1 class="text-4xl md:text-6-xl font-bold leading-tight uppercase
+                bg-gradient-to-r from-blue-600 to-black bg-clip-text text-transparent
+            ">
+                create an account with us
+            </h1>
+            <p class="text-blue-300 mt-1 text capitalize">
+                very secure, and protected. our users security is our job.
+            </p>
+
+            {% if messages %}
+            {% for message in messages %}
+
+            <div class="text-gray-300 mt-1 text capitalize">
+                <h5>Info</h5>
+                <p>
+                    {{ message }}
+                </p>
+            </div>
+
+            {% endfor %}
+            {% endif %}
+
+            <div
+                class="py-5 flex flex-col gap-5"
+            >
+                <div>
+                    <form action=""
+                        method="post" enctype="multipart/form-data"
+                        class="flex flex-col"
+                    >
+
+                        {% csrf_token %}
+
+                        <div class="flex flex-wrap gap-1 w-full">
+                            <div class="w-full md:w-[49%]">
+                                <label for="" class="text-blue-900 capitalize">organization name</label>
+                                <input 
+                                    type="text"
+                                    name="org_name"
+                                    placeholder="Organization Name"
+                                    class="w-full outline-none rounded border-1 border-blue-900 p-1 mb-3"
+                                >
+                            </div>
+                            <div class="w-full md:w-[49%]">
+                                <label for="" class="text-blue-900 capitalize">oganization logo <small><i>(optional)</i></small></label>
+                                <input 
+                                    type="file"
+                                    name="logo"
+                                    placeholder="Logo"
+                                    class="w-full outline-none rounded border-1 border-blue-900 p-1 mb-3"
+                                >
+                            </div>
+                        </div>
+                        <div class="flex flex-wrap gap-1 w-full">
+                            <div class="w-full md:w-[49%]">
+                                <label for="" class="text-blue-900 capitalize">username</label>
+                                <input 
+                                    type="text"
+                                    name="username"
+                                    placeholder="Username"
+                                    class="w-full outline-none rounded border-1 border-blue-900 p-1 mb-3"
+                                >
+                            </div>    
+                            <div class="w-full md:w-[49%]">
+                                <label for="" class="text-blue-900 capitalize">phone number</label>
+                                <input 
+                                    type="number"
+                                    name="phone"
+                                    placeholder="Phone Number"
+                                    class="w-full outline-none rounded border-1 border-blue-900 p-1 mb-3"
+                                >
+                            </div>    
+                        </div>
+                        <div class="flex flex-wrap gap-1 w-full">
+                            <div class="w-full md:w-[49%]">
+                                <label for="" class="text-blue-900 capitalize">email</label>
+                                <input 
+                                    type="email"
+                                    name="email"
+                                    placeholder="Email"
+                                    class="w-full outline-none rounded border-1 border-blue-900 p-1 mb-3"
+                                >
+                            </div>    
+                            <div class="w-full md:w-[49%]">
+                                <label for="" class="text-blue-900 capitalize">gender</label>
+                                <select name="gender" id=""
+                                    class="w-full outline-none rounded border-1 border-blue-900 p-1 mb-3"
+                                >
+                                    <option value="male">
+                                        Male
+                                    </option>
+                                    <option value="female">
+                                        Female
+                                    </option>
+                                </select>
+                            </div>    
+                        </div>
+                        <div class="flex flex-wrap gap-1 w-full">
+                            <div class="w-full md:w-[49%]">
+                                <label for="" class="text-blue-900 capitalize">subdomain name</label>
+                                <input 
+                                    type="text"
+                                    name="sub_name"
+                                    placeholder="Subdomain"
+                                    class="w-full outline-none rounded border-1 border-blue-900 p-1 mb-3"
+                                >
+                            </div>    
+                            <div class="w-full md:w-[49%]">
+                                <label for="" class="text-blue-900 capitalize">password</label>
+                                <input
+                                    type="password"
+                                    name="password"
+                                    placeholder="Password"
+                                    class="w-full outline-none rounded border-1 border-blue-900 p-1 mb-3"
+                                >
+                            </div>    
+                        </div>
+                        <button type="submit"
+                            class="bg-blue-600 text-white text-xs p-2 uppercase font-semibold rounded"
+                        >
+                            sign up
+                        </button>
+                    </form>
+                </div>
+            </div>
+            <div
+                class="py-5 flex gap-5"
+            >
+                <a href="{% url 'login' %}" class="text-blue-800 capitalize font-bold">login here</a>
+            </div>
+        </div>
+        <!-- <div class="w-full md:w-[300px]">
+            <img 
+                src="{% static 'images/img6.png' %}" 
+                alt="image"
+                class="w-full object-contain"
+            >
+        </div> -->
+    </div>
+
+</div>
+
+<!-- for footer -->
+{% include 'base/footer.html' %}
+
+{% endblock %}

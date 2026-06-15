@@ -1,0 +1,206 @@
+
+
+{% extends 'base/head.html' %}
+{% load static %}
+{% load humanize %}
+{% block content %}
+
+
+<!-- for nave -->
+{% include 'base/usersnav.html' %}
+
+<div class="px-5 py-10 md:px-6 md:py-8 absolute w-full mt-15 md:mt-18">
+
+    <!-- <div class="md:flex md:flex-wrap gap-3"> -->
+    <div class="w-full md:flex md:flex-wrap gap-3 justify-between">
+        <a href="{% url 'orgusers' %}" class="m-1 md:m-0">
+            <div 
+                class="bg-gradient-to-br from-blue-400 to-blue-900 rounded flex flex-wrap
+                items-center w-full md:w-[282px] p-5 shadow md:h-40"
+            >
+                <div class="flex items-center pb-2 w-full">
+                    <i class="fa fa-users text-blue-400 p-3 bg-white rounded"></i>
+                    <h3 class="ml-3 text-white font-bold uppercase text-[14px] md:text-[16px]">
+                        view users
+                    </h3>
+                </div>
+                <div class="w-full">
+                    <h2 class="text-white uppercase text-[2rem]">
+                        {{ users.count | intcomma }}
+                    </h2>
+                    <p class="text-gray-300 font-lighter capitalize">
+                        Registered user
+                    </p>
+                </div>
+            </div>
+        </a>
+        <a href="{% url 'founditems' %}" class="m-1 md:m-0">
+            <div 
+                class="bg-gradient-to-br from-blue-400 to-blue-900 rounded flex flex-wrap 
+                items-center w-full md:w-[282px] p-5 shadow md:h-40 "
+            >
+                <div class="flex items-center pb-2 w-full">
+                    <i class="fa fa-check-circle text-blue-400 p-3 bg-white rounded"></i>
+                    <h3 class="ml-3 text-white font-bold uppercase text-[14px] md:text-[16px]">
+                        found
+                    </h3>
+                </div>
+                <div class="w-full">
+                    <h2 class="text-white uppercase text-[2rem]">
+                        {{ foundItems.count | intcomma }}
+                    </h2>
+                    <p class="text-gray-300 font-lighter capitalize">
+                        All found items
+                    </p>
+                </div>
+            </div>
+        </a>
+        <a href="{% url 'claimeditems' %}" class="m-1 md:m-0">
+            <div 
+                class="bg-gradient-to-br from-blue-400 to-blue-900 rounded flex flex-wrap
+                items-center w-full md:w-[282px] p-5 shadow md:h-40"
+            >
+                <div class="flex items-center pb-2 w-full">
+                    <i class="fa fa-times text-blue-400 p-3 bg-white rounded"></i>
+                    <h3 class="ml-3 text-white font-bold uppercase text-[14px] md:text-[16px]">
+                        claimed
+                    </h3>
+                </div>
+                <div class="w-full">
+                    <h2 class="text-white uppercase text-[2rem]">
+                        {{ claimedItems.count | intcomma }}
+                    </h2>
+                    <p class="text-gray-300 font-lighter capitalize">
+                        All cliamed items
+                    </p>
+                </div>
+            </div>
+        </a>
+        <a href="{% url 'additem' %}" class="m-1 md:m-0">
+            <div 
+                class="bg-gradient-to-br from-blue-400 to-blue-900 rounded flex flex-wrap 
+                items-center w-full md:w-[282px] p-5 shadow md:h-40"
+            >
+                <div class="flex items-center pb-2 w-full">
+                    <i class="fa fa-plus text-blue-400 p-3 bg-white rounded"></i>
+                    <h3 class="ml-3 text-white font-bold uppercase text-[14px] md:text-[16px]">
+                        add item
+                    </h3>
+                </div>
+                <div class="w-full">
+                    <p class="text-gray-300 font-lighter capitalize">
+                        post new item
+                    </p>
+                </div>
+            </div>
+        </a>
+    </div>
+
+    <div>
+        <a href="{% url 'claimmers' %}" class="m-1 md:m-0">
+            <div 
+                class="bg-gradient-to-br from-blue-400 to-blue-900 w-full rounded shadow my-2"
+            >
+                <div class="flex items-center">
+                    <div class="p-5">
+                        <i class="fa fa-users text-blue-400 p-3 bg-white rounded"></i>
+                    </div>
+                    <div class="w-full">
+                        <h1 class="text-1xl font-bold text-white capitalize">
+                            Item Claims({{ claimmers.count | intcomma }})
+                        </h1>
+                    </div>
+                </div>
+            </div>
+        </a>
+    </div>
+
+    <div class="flex-cols">
+
+        <div class="flex items-center px-2 pt-5 pb-2 w-full text-blue-500">
+            <i class="fa fa-cubes"></i>
+            <h3 class="ml-3 font-bold uppercase">
+                all items ({{ allItems.count | intcomma }})
+            </h3>
+        </div>
+
+        {% if allItems %}
+
+        {% for item in allItems %}
+
+        <div 
+            class="w-full rounded shadow p-1 my-2"
+        >
+            <div class="md:flex">
+                <a href="{{ item.picture.url }}">
+                    <img 
+                        src="{{ item.picture.url }}" 
+                        alt="item image"
+                        class="w-[100px] object-contain pr-3
+                        md:w-[200px] md:object-contain rounded"
+                    >
+                </a>
+                <div class="w-full">
+                    <h1 class="text-1xl font-bold text-blue-600 capitalize">
+                        {{ item.name }}
+                    </h1>
+                    <p class="text-xs text-blue-400 capitalize">
+                        <b class="text-blue-600">Found Location:</b> {{ item.location_found }}
+                    </p>
+                    <p class="text-xs text-blue-400 capitalize">
+                        {{ item.description }}
+                    </p>
+                    <small class="text-gray-500 text-[10px]">POSTED ON: {{ item.date_posted }}</small><br>
+                    <small class="text-gray-500 text-[10px]">ITEM CATEGORY: {{ item.category }}</small><br>
+                    <small class="text-gray-500 text-[10px]">ITEM STATUS: {{ item.status }}</small><br>
+                    <small class="text-gray-500 text-[10px]">ITEM ID: {{ item.item_id }}</small><br>
+                </div>
+            </div>
+            <div class="py-2">
+                
+                {% if profile.role == 'admin' %}
+
+                <a href="{% url 'deleteitem' item.id %}" 
+                    class="font-lighter capitalize bg-red-500 rounded p-1 text-white text-[12px] mr-1"
+                >
+                    delete
+                </a>
+
+                {% endif %}
+
+                <a href="{% url 'claimitem' item.id %}" 
+                    class="font-lighter capitalize bg-green-500 rounded p-1 text-white text-[12px] mr-1"
+                >
+                    claim item
+                </a>
+            </div>
+        </div>
+
+        {% endfor %}
+
+        {% else %}
+
+        <div 
+            class="w-full rounded shadow p-1 my-2"
+        >
+            <div class="flex items-center">
+                <div class="p-10">
+                    <i class="fa fa-cubes text-gray-300"></i>
+                </div>
+                <div class="w-full">
+                    <h1 class="text-1xl font-bold text-gray-600 capitalize">
+                        no item record found
+                    </h1>
+                </div>
+            </div>
+        </div>
+
+        {% endif %}
+
+    </div>
+</div>
+
+
+{% endblock %}
+
+

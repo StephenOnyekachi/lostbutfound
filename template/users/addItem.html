@@ -1,0 +1,108 @@
+
+
+{% extends 'base/head.html' %}
+{% load static %}
+{% load humanize %}
+{% block content %}
+
+
+<!-- for nave -->
+{% include 'base/usersnav.html' %}
+
+
+<div class="px-5 py-10 md:px-6 md:py-8 absolute w-full mt-15 md:mt-18">
+
+    <div>
+
+        <div class="flex items-center px-2 pt-5 pb-2 w-full text-blue-500">
+            <i class="fa fa-cube"></i>
+            <h3 class="ml-3 font-bold uppercase">
+                add new item
+            </h3>
+        </div>
+
+        <div 
+            class="w-full rounded shadow p-1 my-2"
+        >
+            <div class="py-5 px-3">
+                <div class="w-full mt-2">
+                    <form action=""
+                        method="post"
+                        enctype="multipart/form-data"
+                    >
+
+                        {% csrf_token %}
+
+                        <div class="pb-2">
+                            <p class="text-xs text-blue-400 capitalize font-bold">image:</p>
+                            <input type="file" name="image" required
+                                class="border-1 rounded border-blue-600 w-full p-1 pl-2 outline-none"
+                            >
+                        </div>
+                        <div class="pb-2">
+                            <p class="text-xs text-blue-400 capitalize font-bold">name:</p>
+                            <input type="text" placeholder="Name" name="name" required
+                                class="border-1 rounded border-blue-600 w-full p-1 pl-2 outline-none"
+                            >
+                        </div>
+                        <div class="pb-2">
+                            <p class="text-xs text-blue-400 capitalize font-bold">category:</p>
+                            <select name="category" id="" required
+                                class="w-full outline-none rounded border-1 border-blue-600 p-1 mb-3 outline-none"
+                            >   
+                                <option value="">
+                                    Selete Category
+                                </option>
+                                {% for value, label in category %}
+                                <option value="{{ value }}">
+                                    {{ label }}
+                                </option>
+                                {% endfor %}
+                            </select>
+                        </div>
+                        <div class="pb-2">
+                            <p class="text-xs text-blue-400 capitalize font-bold">status:</p>
+                            <select name="status" id="" required
+                                class="w-full outline-none rounded border-1 border-blue-600 p-1 mb-3 outline-none"
+                            >
+                                <option value="">
+                                    Selete Status
+                                </option>
+                                {% for value, label in status %}
+                                <option value="{{ value }}">
+                                    {{ label }}
+                                </option>
+                                {% endfor %}
+                            </select>
+                        </div>
+                        <div class="pb-2">
+                            <p class="text-xs text-blue-400 capitalize font-bold">location:</p>
+                            <input type="text" placeholder="Location" name="location" required
+                                class="border-1 rounded border-blue-600 w-full p-1 pl-2 outline-none"
+                            >
+                        </div>
+                        <div class="pb-2">
+                            <p class="text-xs text-blue-400 capitalize font-bold">description:</p>
+                            <textarea name="description" id="" required
+                                class="border-1 rounded border-blue-600 w-full h-30 p-1 pl-2 outline-none"
+                                placeholder="Description here..."
+                            ></textarea>
+                        </div>
+                        <div>
+                            <button
+                                type="submit"
+                                class="w-full font-lighter capitalize bg-blue-600 rounded p-2 text-white text-[12px] mr-1"
+                            >
+                                add item
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+        
+    </div>
+</div>
+
+
+{% endblock %}

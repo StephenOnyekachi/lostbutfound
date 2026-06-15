@@ -1,0 +1,211 @@
+
+
+{% extends 'base/head.html' %}
+{% load static %}
+{% load humanize %}
+{% block content %}
+
+
+<!-- for nave -->
+{% include 'base/usersnav.html' %}
+
+{% if profile.org.status == 'inactive' %}
+
+<div class="bg-white h-[100vh] md:h-screen">
+
+    <div class="flex flex-col-reverse md:flex-row items-center justify-center h-250 gap-10 p-10 md:p-2">
+        <div class="max-w-xl">
+            <h1 class="text-4xl md:text-6-xl font-bold leading-tight uppercase
+                bg-gradient-to-r from-blue-600 to-black bg-clip-text text-transparent
+            ">
+                {{ profile.org.orgname }}
+            </h1>
+            <p class="text-blue-900 mt-5 text-lg capitalize">
+                renew your payment with lost but found items
+            </p>
+            <p class="text-blue-300 mt-1 text capitalize">
+                scrow down to view previous payments
+            </p>
+            <div
+                class="py-5 flex gap-5"
+            >
+                <a href="{% url 'renewpayment' %}" 
+                    class="bg-blue-800 text-white capitalize font-bold p-2 rounded"
+                >
+                    renew now
+                </a>
+            </div>
+        </div>
+        <div class="w-full md:w-[250px]">
+            <img 
+                src="{% static 'images/pay.png' %}" 
+                alt="image"
+                class="w-full object-contain"
+            >
+        </div>
+    </div>
+
+</div>
+
+<div class="px-5 py-10 md:px-6 md:py-8 absolute w-full mt-15 md:mt-18">
+    <div>
+        <div class="flex items-center px-2 pt-5 pb-2 w-full text-blue-500">
+            <i class="fa fa-money"></i>
+            <h3 class="ml-3 font-bold uppercase">
+                all payments
+            </h3>
+        </div>
+
+        {% if payment %}
+
+        {% for payment in payment %}
+
+        <div 
+            class="w-full rounded shadow p-1 my-2"
+        >
+            <div class="flex">
+                <div class="p-10">
+                    <i class="fa fa-money text-blue-300"></i>
+                </div>
+                <div class="w-full">
+                    <h1 class="text-1xl font-bold text-blue-600 capitalize">
+                        <i class="fa fa-dollar"></i> {{ payment.amount | intcomma }}
+                    </h1>
+                    <p class="text-xs text-blue-400 capitalize">
+                        STATUS: {{ payment.status }}.
+                    </p>
+                    <p class="text-xs text-blue-400 capitalize">
+                        PAYMENT ID: {{ payment.paystack_transaction_id }}.
+                    </p>
+                    <small class="text-gray-500 text-[10px]">PAID ON: {{ payment.created_at }}</small>
+                </div>
+            </div>
+        </div>
+
+        {% endfor %}
+
+        {% else %}
+
+        <div 
+            class="w-full rounded shadow p-1 my-2"
+        >
+            <div class="flex items-center">
+                <div class="p-10">
+                    <i class="fa fa-money text-gray-300"></i>
+                </div>
+                <div class="w-full">
+                    <h1 class="text-1xl font-bold text-gray-600 capitalize">
+                        no payment record found
+                    </h1>
+                </div>
+            </div>
+        </div>
+
+        {% endif %}
+        
+    </div>
+</div>
+
+{% elif profile.org.status == 'active' %}
+
+<div class="px-5 py-10 md:px-6 md:py-8 absolute w-full mt-15 md:mt-18">
+    <div>
+        <div class="flex items-center px-2 pt-5 pb-2 w-full text-blue-500">
+            <i class="fa fa-money"></i>
+            <h3 class="ml-3 font-bold uppercase">
+                all payments
+            </h3>
+        </div>
+
+        {% if payment %}
+
+        {% for payment in payment %}
+
+        <div 
+            class="w-full rounded shadow p-1 my-2"
+        >
+            <div class="flex">
+                <div class="p-10">
+                    <i class="fa fa-money text-blue-300"></i>
+                </div>
+                <div class="w-full">
+                    <h1 class="text-1xl font-bold text-blue-600 capitalize">
+                        <i class="fa fa-dollar"></i> {{ payment.amount | intcomma }}
+                    </h1>
+                    <p class="text-xs text-blue-400 capitalize">
+                        STATUS: {{ payment.status }}.
+                    </p>
+                    <p class="text-xs text-blue-400 capitalize">
+                        PAYMENT ID: {{ payment.paystack_transaction_id }}.
+                    </p>
+                    <small class="text-gray-500 text-[10px]">PAID ON: {{ payment.created_at }}</small>
+                </div>
+            </div>
+        </div>
+
+        {% endfor %}
+
+        {% else %}
+
+        <div 
+            class="w-full rounded shadow p-1 my-2"
+        >
+            <div class="flex items-center">
+                <div class="p-10">
+                    <i class="fa fa-money text-gray-300"></i>
+                </div>
+                <div class="w-full">
+                    <h1 class="text-1xl font-bold text-gray-600 capitalize">
+                        no payment record found
+                    </h1>
+                </div>
+            </div>
+        </div>
+
+        {% endif %}
+
+    </div>
+</div>
+
+{% elif profile.org.status == 'suspended' %}
+
+<div class="bg-white h-[100vh] md:h-screen">
+
+    <div class="flex flex-col-reverse md:flex-row items-center justify-center h-250 gap-10 p-10 md:p-2">
+        <div class="max-w-xl">
+            <h1 class="text-4xl md:text-6-xl font-bold leading-tight uppercase
+                bg-gradient-to-r from-blue-600 to-black bg-clip-text text-transparent
+            ">
+                {{ profile.org.orgname }}
+            </h1>
+            <p class="text-blue-900 mt-5 text-lg capitalize">
+                your account with lost but found items is suspended
+            </p>
+            <p class="text-blue-300 mt-1 text capitalize">
+                contact management for more information
+            </p>
+            <div
+                class="py-5 flex gap-5"
+            >
+                <a href="https//wa.me/+2349031360947?text=account+issue+{{ profile.org.orgname }}" 
+                    class="bg-blue-800 text-white capitalize font-bold p-2 rounded"
+                >
+                    contact us now
+                </a>
+            </div>
+        </div>
+        <div class="w-full md:w-[250px]">
+            <img 
+                src="{% static 'images/icon1.jpg' %}" 
+                alt="image"
+                class="w-full object-contain"
+            >
+        </div>
+    </div>
+
+</div>
+
+{% endif %}
+
+
+{% endblock %}

@@ -1,0 +1,71 @@
+
+
+{% load static %}
+
+<div class="fixed flex flex-col w-full mt-0 z-100">
+
+    <div class="flex items-center justify-between p-5 bg-blue-900 w-full mt-0 z-100">
+        <div class="flex items-center">
+            <img 
+                src="{% static 'images/img3.png' %}" 
+                alt="image"
+                class="w-[20px] md:w-[50px]"
+            >
+            <h3 class="text-white font-lighter capitalize">
+                lost but found
+            </h3>
+        </div>
+        <div>
+
+            {% if request.path == '/adminpage/' %}
+
+            <a href="{% url 'adminsetting' %}"
+                class="text-white capitalize border-1 border-white rounded p-2 text-[10px] font-bold mr-2"
+            >
+                settings
+            </a>
+
+            {% else %}
+
+            <a href="{% url 'adminpage' %}"
+                class="text-white capitalize border-1 border-white rounded p-2 text-[10px] font-bold mr-2"
+            >
+                dashboard
+            </a>
+
+            {% endif %}
+
+            <a href="{% url 'logout' %}"
+                class="text-red-500 capitalize border-1 border-white rounded p-2 text-[10px] font-bold"
+            >
+                log out
+            </a>
+
+        </div>
+    </div>
+
+    {% if messages %}
+
+    {% for message in messages %}
+
+    <div class="flex text-gray-300 items-center justify-between p-5 bg-blue-900 w-full mt-0 z-100">
+        <div class="text-gray-300 mt-1 text capitalize">
+            <h5>Info</h5>
+            <p>
+                {{ message }}
+            </p>
+        </div>
+        <div>
+            <a href="">
+                <i class="fa fa-times"></i>
+            </a>
+        </div>
+    </div>
+
+    {% endfor %}
+
+    {% endif %}
+
+</div>
+
+

@@ -1,0 +1,105 @@
+
+
+{% load static %}
+
+<div class="fixed flex flex-col w-full mt-0 z-100">
+
+    <div class="flex items-center justify-between p-5 bg-blue-900 w-full mt-0 z-100">
+        <div class="flex items-center">
+
+            {% if profile.org.logo %}
+
+            <img 
+                src="{{ profile.org.logo.url }}" 
+                alt="image"
+                class="w-[20px] md:w-[50px] pr-2"
+            >
+
+            {% else %}
+
+            <img 
+                src="{% static 'images/img3.png' %}" 
+                alt="image"
+                class="w-[20px] md:w-[50px]"
+            >
+
+            {% endif %}
+
+            <h3 class="text-white font-lighter capitalize">
+                {{ profile.org.orgname }}
+            </h3>
+        </div>
+        <div>
+
+            {% if request.path == '/dashboard/' %}
+
+            <a href="{% url 'searchitem' %}"
+                class="text-white capitalize border-1 border-white rounded p-2 text-[10px] font-bold mr-2"
+            >
+                <i class="fa fa-search"></i>
+            </a>
+
+            <a href="{% url 'orgprofile' %}"
+                class="text-white capitalize border-1 border-white rounded p-2 text-[10px] font-bold mr-2"
+            >
+                profile
+            </a>
+
+            {% else %}
+
+            <a href="{% url 'dashboard' %}"
+                class="text-white capitalize border-1 border-white rounded p-2 text-[10px] font-bold mr-2"
+            >
+                dashboard
+            </a>
+
+            {% endif %}
+
+            <a href="{% url 'logout' %}"
+                class="text-red-500 capitalize border-1 border-white rounded p-2 text-[10px] font-bold"
+            >
+                log out
+            </a>
+        </div>
+    </div>
+
+    {% if messages %}
+
+    {% for message in messages %}
+
+    <div class="flex text-gray-300 items-center justify-between p-5 bg-blue-900 w-full mt-0 z-100">
+        <div class="text-gray-300 mt-1 text capitalize">
+            <h5>Info</h5>
+            <p>
+                {{ message }}
+            </p>
+        </div>
+        <div>
+            <a href="">
+                <i class="fa fa-times"></i>
+            </a>
+        </div>
+    </div>
+
+    {% endfor %}
+
+    {% endif %}
+
+</div>
+
+<!-- <div class="p-5 bg-blue-900 w-full mt-0 z-100">
+    <div class="fixed flex items-center justify-between p-5 bg-blue-900 w-full mt-0 z-100">
+        <div 
+            class="w-full md:w-[282px] capitalize text text-gray-300 p-2"
+        >
+            <h5>Info</h5>
+            <p>
+                {{ message }}
+            </p>
+        </div>
+    </div>
+</div> -->
+
+
+
+

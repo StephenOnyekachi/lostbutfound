@@ -1,0 +1,64 @@
+
+{% extends 'base/head.html' %}
+{% load static %}
+{% load humanize %}
+{% block content %}
+
+
+<!-- for nave -->
+{% include 'base/adminnav.html' %}
+
+
+<div class="px-5 py-10 md:px-6 md:py-8 absolute w-full mt-15 md:mt-18">
+
+    <div class="bg-white h-auto">
+
+        <div class="p-5 md:p-10">
+            <p class="text-2xl text-blue-900 mt-1 text capitalize pt-2">
+                about to email
+            </p>
+            <h1 class="text-4xl md:text-6-xl font-bold leading-tight uppercase
+                bg-gradient-to-r from-blue-600 to-black bg-clip-text text-transparent
+            ">
+                to {{ orgs.count }} (all) organizations
+            </h1>
+        </div>
+        
+        <div class="flex flex-col md:flex-row items-center h-auto gap-10 p-5 md:p-10">
+            <div class="py-3 px-3 rounded shadow w-full">
+                <div class="h-auto">
+                    <form action=""
+                        method="post"
+                        enctype="multipart/form-data"
+                        class="flex flex-col"
+                    >
+
+                        {% csrf_token %}
+
+                        <label for="" class="text-blue-900 capitalize">subject</label>
+                        <input type="text" placeholder="Subject here..." name="subject" 
+                            class="border-1 rounded border-blue-900 w-full p-1"
+                        >
+                        <label for="" class="text-blue-900 capitalize">note</label>
+                        <textarea name="note" id=""
+                            placeholder="Shot Description" required
+                            class="w-full outline-none rounded border-1 border-blue-900 p-1 pl-2 mb-3 h-40"
+                        ></textarea>
+                        <button type="submit"
+                            class="bg-blue-600 text-white text-xs p-2 uppercase font-semibold rounded"
+                        >
+                            send mail
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+
+</div>
+
+
+{% endblock %}
+

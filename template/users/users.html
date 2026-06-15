@@ -1,0 +1,94 @@
+
+
+{% extends 'base/head.html' %}
+{% load static %}
+{% load humanize %}
+{% block content %}
+
+
+<!-- for nave -->
+{% include 'base/usersnav.html' %}
+
+
+<div class="px-5 py-10 md:px-6 md:py-8 absolute w-full mt-15 md:mt-18">
+
+    <div>
+        <div class="flex items-center px-2 pt-5 pb-2 w-full text-blue-500">
+            <i class="fa fa-users"></i>
+            <h3 class="ml-3 font-bold uppercase">
+                {{ users.count }}, user<i class="lowercase">(s)</i>
+            </h3>
+        </div>
+
+        {% if users %}
+
+        {% for user in users %}
+
+        <div 
+            class="w-full rounded shadow p-1 my-2"
+        >
+            <div class="flex">
+                <div class="">
+                    <i class="fa fa-user text-blue-600 bg-blue-200 p-6 rounded-full m-2"></i>
+                </div>
+                <div class="w-full">
+                    <h1 class="text-1xl font-bold text-blue-600 capitalize">
+                        {{ user.user.username }}
+                    </h1>
+                    <p class="text-xs text-blue-400 capitalize">
+                        {{ user.phone_number }}
+                    </p>
+                    <p class="text-xs text-blue-400 capitalize">
+                        {{ user.user.email }}
+                    </p>
+                    <p class="text-xs text-blue-400 capitalize">
+                        {{ user.gender }}
+                    </p>
+                </div>
+            </div>
+
+            <div class="py-2">
+                <div>
+                    <small class="text-gray-500 text-[10px]">JOINED ON: {{ user.created_at }}</small>
+                </div>
+
+                {% if profile.role == 'admin' %}
+
+                <a href="{% url 'deleteuser' user.user.id %}" 
+                    class="font-lighter capitalize bg-red-500 rounded p-1 text-white text-[12px] mr-1"
+                >
+                    delete user
+                </a>
+
+                {% endif %}
+
+            </div>
+
+        </div>
+
+        {% endfor %}
+
+        {% else %}
+
+        <div 
+            class="w-full rounded shadow p-1 my-2"
+        >
+            <div class="flex items-center">
+                <div class="p-10">
+                    <i class="fa fa-user text-gray-300"></i>
+                </div>
+                <div class="w-full">
+                    <h1 class="text-1xl font-bold text-gray-600 capitalize">
+                        no user found
+                    </h1>
+                </div>
+            </div>
+        </div>
+
+        {% endif %}
+
+    </div>
+</div>
+
+
+{% endblock %}

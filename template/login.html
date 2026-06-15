@@ -1,0 +1,102 @@
+
+
+{% extends 'base/head.html' %}
+{% load static %}
+{% block content %}
+
+<div class="p-10">
+    <a href="{% url 'index' %}" 
+        class="text-blue-800 capitalize font-bold text-[12px] border-1 border-blue-800 rounded px-3 py-2"
+    >
+        back home
+    </a>
+</div>
+
+<div class="bg-white h-auto">
+
+    <div class="flex flex-col-reverse md:flex-row items-center justify-center h-auto gap-10 p-10 md:p-2">
+        <div class="max-w-xl pt-10">
+            <h1 class="text-4xl md:text-6-xl font-bold leading-tight uppercase
+                bg-gradient-to-r from-blue-600 to-black bg-clip-text text-transparent
+            ">
+                login to your account
+            </h1>
+            <p class="text-blue-300 mt-1 text capitalize">
+                very secure, and protected. our users security is our job.
+            </p>
+
+            {% if messages %}
+            {% for message in messages %}
+
+            <div class="text-gray-300 mt-1 text capitalize">
+                <h5>Info</h5>
+                <p>
+                    {{ message }}
+                </p>
+            </div>
+
+            {% endfor %}
+            {% endif %}
+            
+            <div
+                class="py-5 flex flex-col gap-5"
+            >
+                <div>
+                    <form action="" 
+                        method="post" enctype="multipart/form-data"
+                        class="flex flex-col"
+                    >
+
+                        {% csrf_token %}
+
+                        <label for="" class="text-blue-900 capitalize">username</label>
+                        <input 
+                            type="text" 
+                            placeholder="Username"
+                            name="username"
+                            class="w-full outline-none rounded border-1 border-blue-900 p-1 mb-3"
+                        >
+                        <label for="" class="text-blue-900 capitalize">password</label>
+                        <input
+                            type="password" 
+                            placeholder="Password"
+                            name="password"
+                            class="w-full outline-none rounded border-1 border-blue-900 p-1 mb-3"
+                        >
+                        <button type="submit"
+                            class="bg-blue-600 text-white text-xs p-2 uppercase font-semibold rounded"
+                        >
+                            login
+                        </button>
+                    </form>
+                </div>
+            </div>
+            <div
+                class="py-2 flex gap-5"
+            >
+                <a href="" class="text-red-300 capitalize font-sm">forgetten password</a>
+
+            </div>
+            <div
+                class="py-5 flex gap-5"
+            >
+                <a href="{% url 'signup' %}" class="text-blue-800 capitalize font-bold">create organization here</a>
+            </div>
+        </div>
+        <!-- <div class="w-full md:w-[400px]">
+            <img 
+                src="{% static 'images/img3.png' %}" 
+                alt="image"
+                class="w-full object-contain"
+            >
+        </div> -->
+    </div>
+
+</div>
+
+<!-- for footer -->
+{% include 'base/footer.html' %}
+
+
+{% endblock %}
+

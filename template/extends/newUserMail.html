@@ -1,0 +1,75 @@
+
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mail</title>
+    <style>
+        * {
+            padding: 0px;
+            margin: 0px;
+            box-sizing: border-box;
+            font-family: 'Arial Narrow Bold', sans-serif;
+        }
+    </style>
+</head>
+<body style="background-color: rgb(201, 201, 201); color: black;">
+    
+    <div style="padding: 10px; padding-top: 10px; padding-bottom: 10px; height: 85vh; align-content: center;">
+
+        <h2 style="padding-top: 5px; padding-bottom: 5px; text-transform: capitalize;">
+            {{ user.username }}
+        </h2>
+        <h3>
+            We gladly welcomed you to <b style="text-transform: capitalize;">{{ org.orgname}}.</b>
+        </h3>
+        <p style="padding-top: 5px; padding-bottom: 5px;">
+            Becoming our member you can report, search for missing items.
+        </p>
+        <p style="padding-top: 5px; padding-bottom: 5px;">
+            Your organization subdomain name is
+            <a href="">
+                <!-- https://{{ org.subdomain }}.yourdomain.com -->
+                http://{{ org.subdomain }}.localhost:8000
+            </a>
+        </p>
+        <p>
+            This will serve as referring link for 
+            <h3 style="padding-top: 5px; padding-bottom: 5px;"> 
+                {{ org.orgname}}. 
+            </h3>
+            new member registration.
+        </p>
+        <p style="padding-top: 5px; padding-bottom: 5px;">
+            We are here to serve you, give you are full support and secure your organization.
+        </p>
+    </div>
+
+    <div style="background-color: rgb(29, 29, 29); padding: 20px;">
+        <div style="display: flex; align-items: center; justify-content: center; padding: 5px;">
+            <h3 style="color: rgb(230, 230, 230); text-transform: uppercase;">
+                lost but found items
+            </h3>
+        </div>
+        <div style="display: flex; align-items: center; justify-content: center; padding: 5px;">
+            <h3 style="color: rgb(230, 230, 230); text-transform: uppercase;">
+                +234 9031 360 947
+            </h3>
+        </div>
+        <div style="display: flex; align-items: center; justify-content: center; padding: 5px;">
+            <p
+                style="color: rgb(230, 230, 230); text-transform: capitalize;"
+            >
+                &copy;
+                <script>
+                    document.write(new Date().getFullYear())
+                </script> 
+                Stephen Onyekachi. All rights reserved
+            </p>
+        </div>
+    </div>
+
+</body>
+</html>

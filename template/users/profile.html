@@ -1,0 +1,215 @@
+
+
+{% extends 'base/head.html' %}
+{% load static %}
+{% load humanize %}
+{% block content %}
+
+
+<!-- for nave -->
+{% include 'base/usersnav.html' %}
+
+
+<div class="px-5 py-10 md:px-6 md:py-8 absolute w-full mt-15 md:mt-18">
+
+    <div>
+        <div class="flex items-center px-2 pt-5 pb-2 w-full text-blue-500">
+            <i class="fa fa-user"></i>
+            <h3 class="ml-3 font-bold uppercase">
+                my profile
+            </h3>
+        </div>
+        <div 
+            class="w-full rounded shadow p-1 my-2"
+        >
+            <div class="w-full py-5 px-3">
+                <div>
+                    <p class="text-xs text-blue-400 capitalize">
+                        user name
+                    </p>
+                    <h1 class="text-1xl font-bold text-blue-600 capitalize">
+                        {{ profile.user.username}}
+                    </h1>
+                </div>
+                <div>
+                    <p class="text-xs text-blue-400 capitalize">
+                        phone number
+                    </p>
+                    <h1 class="text-1xl font-bold text-blue-600 capitalize">
+                        {{ profile.phone_number }}
+                    </h1>
+                </div>
+                <div>
+                    <p class="text-xs text-blue-400 capitalize">
+                        email
+                    </p>
+                    <h1 class="text-1xl font-bold text-blue-600">
+                        {{ profile.user.email }}
+                    </h1>
+                </div>
+                <div>
+                    <p class="text-xs text-blue-400 capitalize">
+                        gender
+                    </p>
+                    <h1 class="text-1xl font-bold text-blue-600 capitalize">
+                        {{ profile.gender }}
+                    </h1>
+                </div>
+                <div>
+                    <p class="text-xs text-blue-400 capitalize">
+                        status
+                    </p>
+                    <h1 class="text-1xl font-bold text-blue-600 capitalize">
+                        {{ profile.role }}
+                    </h1>
+                </div>
+                <small class="text-gray-500 text-[10px]">JOINED ON: {{ profile.created_at }}</small>
+            </div>
+        </div>
+
+        <div class="flex items-center px-2 pt-5 pb-2 w-full text-blue-500">
+            <i class="fa fa-home"></i>
+            <h3 class="ml-3 font-bold uppercase">
+                about organization
+            </h3>
+        </div>
+        <div 
+            class="w-full rounded shadow p-1 my-2"
+        >
+            <div class="py-5 px-3">
+                {% if profile.org.logo %}
+
+                <a href="{{ profile.org.logo.url }}">
+                    <img 
+                        src="{{ profile.org.logo.url }}" 
+                        alt="item image"
+                        class="w-[100px] object-contain
+                        md:w-[200px] md:object-contain rounded"
+                    >
+                </a>
+
+                {% else %}
+
+                <a href="{% static 'images/img1.jpeg' %}">
+                    <img 
+                        src="{% static 'images/img1.jpeg' %}" 
+                        alt="item image"
+                        class="w-[100px] object-contain
+                        md:w-[200px] md:object-contain rounded"
+                    >
+                </a>
+
+                {% endif %}
+
+                <div class="w-full mt-2">
+                    <div class="pb-2">
+                        <p class="text-xs text-blue-400 capitalize font-bold">name:</p>
+                        <h3 class="text-1xl font-bold text-blue-600 capitalize">
+                            {{ profile.org.orgname }}
+                        </h3>
+                    </div>
+                    <div class="pb-2">
+                        <p class="text-xs text-blue-400 capitalize font-bold">referring link:</p>
+                        <a href="http://{{ profile.org.subdomain }}.localhost:8000/register/"
+                            class="text-1xl font-bold text-blue-600"
+                        >
+                            <!-- https://{{ profile.org.subdomain }}.yourdomain.com -->
+                            http://{{ profile.org.subdomain }}.localhost:8000/register/
+                        </a>
+                    </div>
+                    <div class="pb-2">
+                        <p class="text-xs text-blue-400 capitalize font-bold">status:</p>
+                        <p class="text-1xl font-bold text-blue-600 capitalize">
+                            {{ profile.org.status }}
+                        </p>
+                    </div>
+                    <div class="pb-2">
+                        <p class="text-xs text-blue-400 capitalize font-bold">plan:</p>
+                        <p class="text-1xl font-bold text-blue-600 capitalize">
+                            {{ profile.org.plan }}
+                        </p>
+                    </div>
+                    <small class="text-gray-500 text-[10px]">CREATED ON: {{ profile.org.date_joined }},</small>
+                    <small class="text-gray-500 text-[10px]">BY OWNER: {{ profile.org.owner }}</small>
+
+                    {% if profile.role == 'admin' %}
+
+                    <div class="py-2">
+                        <a href="{% url 'deleteorg' profile.org.id %}" class="font-lighter capitalize bg-red-500 rounded p-1 text-white text-[12px] mr-1">
+                            delete organization account
+                        </a>
+                    </div>
+
+                    {% endif %}
+
+                </div>
+            </div>
+        </div>
+
+        <div class="flex items-center px-2 pt-5 pb-2 w-full text-blue-500">
+            <i class="fa fa-money"></i>
+            <h3 class="ml-3 font-bold uppercase">
+                view payments
+            </h3>
+        </div>
+        <div 
+            class="w-full rounded shadow p-1 my-2"
+        >
+            <div class="py-5 px-3">
+                <div class="w-full m-1">
+                    <a href="{% url 'payments' %}" 
+                        class="font-lighter capitalize bg-green-500 rounded p-1 text-white text-[12px] mr-1"
+                    >
+                        <i class="fa fa-money"></i> view payments
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        {% if profile.role == 'admin' %}
+
+        <div class="flex items-center px-2 pt-5 pb-2 w-full text-blue-500">
+            <i class="fa fa-copy"></i>
+            <h3 class="ml-3 font-bold uppercase">
+                edit organization
+            </h3>
+        </div>
+        <div 
+            class="w-full rounded shadow p-1 my-2"
+        >
+            <div class="py-5 px-3">
+                <div class="w-full mt-2">
+                    <form action=""
+                        method="post" enctype="multipart/form-data"
+                    >
+
+                        {% csrf_token %}
+
+                        <div class="pb-2">
+                            <p class="text-xs text-blue-400 capitalize font-bold">image/logo:</p>
+                            <input type="file" name="logo" class="border-1 rounded border-blue-600 w-full p-1">
+                        </div>
+                        <div class="pb-2">
+                            <p class="text-xs text-blue-400 capitalize font-bold">name:</p>
+                            <input type="text" placeholder="Name" name="name" class="border-1 rounded border-blue-600 w-full p-1">
+                        </div>
+                        <div>
+                            <button
+                                type="submit"
+                                class="w-full font-lighter capitalize bg-blue-600 rounded p-2 text-white text-[12px] mr-1"
+                            >
+                                save changes
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+        {% endif %}
+
+    </div>
+</div>
+
+
+{% endblock %}
