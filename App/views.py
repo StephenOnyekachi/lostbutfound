@@ -274,12 +274,12 @@ def OrgSignup(request):
                     # info=password1,
                 )
 
-            # # calling sending mail functionn here after creating account
-            # subject = 'Welcome to Lost But Found'
-            # extra_context={
-            #     'org':org
-            # }
-            # SendMail(profile, 'extends/newOrgMail.html', subject, extra_context)
+            # calling sending mail functionn here after creating account
+            subject = 'Welcome to Lost But Found'
+            extra_context={
+                'org':org
+            }
+            SendMail(profile, 'extends/newOrgMail.html', subject, extra_context)
 
             messages.success(request, f'you successfully created a new account with lost but found "{org_name}"')
             return redirect("login")
@@ -369,12 +369,12 @@ def UserSignup(request):
                 phone_number=phone,
             )
 
-        # # calling sending mail functionn here after creating account
-        # subject = ('Welcome to', org.orgname)
-        # extra_context={
-        #     'org':org
-        # }
-        # SendMail(user, 'extends/newUserMail.html.html', subject, extra_context)
+        # calling sending mail functionn here after creating account
+        subject = ('Welcome to', org.orgname)
+        extra_context={
+            'org':org
+        }
+        SendMail(user, 'extends/newUserMail.html.html', subject, extra_context)
 
         messages.success(request, "Account created successfully")
         return redirect("memberlogin")
