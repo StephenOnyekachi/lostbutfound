@@ -9,7 +9,7 @@ from django.utils import timezone
 # Create your models here.
 
 class Plan(models.Model):
-    amount = models.DecimalField(max_digits=10, decimal_places=2)
+    amount = models.DecimalField(max_digits=10, decimal_places=2, null=True)
     name = models.CharField(max_length=50, default='Name')
 
     def __str__(self):
