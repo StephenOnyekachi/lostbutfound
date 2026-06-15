@@ -1,31 +1,22 @@
 
+
 from django.utils import timezone
 
-
 def check_subscription(org):
+    """
+    Returns True if org is still valid (trial or paid), False if expired
+    """
+
     today = timezone.now().date()
 
-    # 1. If user has active paid subscription
+    # still in trial
+    if org.is_trial and org.trial_end:
+        return org.trial_end >= today
+
+    # paid subscription check
     if org.subscription_end:
-        if org.subscription_end >= today:
-            org.status = "active"
-            org.is_trial = False
-            org.save(update_fields=["status", "is_trial"])
-            return
-        else:
-            org.subscription_end = None
+        return org.subscription_end >= today
 
-    # 2. Trial period check
-    if org.trial_end:
-        if org.trial_end >= today:
-            org.status = "active"
-            org.is_trial = True
-            org.save(update_fields=["status", "is_trial"])
-            return
+    # if no subscription set → treat as expired
+    return False
 
-    # 3. Expired everything → block org
-    org.status = "inactive"
-    org.save(update_fields=["status"])
-
-
-    
