@@ -1,25 +1,12 @@
 {
   "name": "lost-items",
   "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
   "scripts": {
+    "build": "npx tailwindcss -i ./static/src/input.css -o ./static/css/output.css --minify",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/StephenOnyekachi/lostbutfound.git"
-  },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
-  "type": "commonjs",
-  "bugs": {
-    "url": "https://github.com/StephenOnyekachi/lostbutfound/issues"
-  },
-  "homepage": "https://github.com/StephenOnyekachi/lostbutfound#readme",
   "devDependencies": {
-    "@tailwindcss/cli": "^4.3.1",
-    "tailwindcss": "^4.3.1"
+    "tailwindcss": "^4.3.0",
+    "@tailwindcss/cli": "^4.3.0"
   }
 }
