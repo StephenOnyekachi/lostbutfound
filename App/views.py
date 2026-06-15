@@ -462,9 +462,12 @@ def MemberLogin(request):
 def Index(request):
 
     # for getting all plans
-    plan1 = Plan.objects.get(id=1)
-    plan2 = Plan.objects.get(id=2)
-    plan3 = Plan.objects.get(id=3)
+    # plan1 = Plan.objects.get(id=1)
+    # plan2 = Plan.objects.get(id=2)
+    # plan3 = Plan.objects.get(id=3)
+    plan1, created = Plan.objects.get_or_create(id=1)
+    plan2, created = Plan.objects.get_or_create(id=2)
+    plan3, created = Plan.objects.get_or_create(id=3)
 
     context = {
         'plan1':plan1,
