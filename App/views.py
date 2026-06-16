@@ -328,7 +328,7 @@ def GetSubdomain(request):
 
 
 # for user signup with org link
-def UserSignup(request):
+def UserSignup(request, subdomain=None):
 
     if request.method == "POST":
         username = request.POST.get("username", "").strip()
@@ -340,6 +340,8 @@ def UserSignup(request):
         
         # Determine subdomain based on the host
         subdomain = GetSubdomain(request)
+        if not subdomain:
+            subdomain = GetSubdomain(request)
 
         # verifing password
         if not password:
