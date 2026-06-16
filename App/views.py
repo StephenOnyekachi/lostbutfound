@@ -284,17 +284,24 @@ def GetSubdomain(request):
 
     # remove www
     if host.startswith("www."):
-        host = host.replace("www.", "")
+        host = host[4:]
+
+    # localhost
+    if host in ["localhost", "127.0.0.1"]:
+        return (
+            request.GET.get("sub_name")
+            or request.POST.get("sub_name")
+        )
+
+    # only allow your domain
+    if not host.endswith("lostbutfound.com"):
+        return None
 
     parts = host.split(".")
 
-    # localhost case
-    if host in ["localhost", "127.0.0.1"]:
-        return request.GET.get("sub_name") or request.POST.get("sub_name")
-
-    # production / staging
+    # no subdomain
     if len(parts) < 3:
-        return None  # no subdomain (example.com)
+        return None
 
     return parts[0]
 
@@ -363,7 +370,7 @@ def UserSignup(request):
             extra_context = {
                 'org': org
             }
-            SendMail(profile, 'extends/newUserMail.html', subject, extra_context)
+            SendMail(user, 'extends/newUserMail.html', subject, extra_context)
         except Exception as e:
             print("EMAIL ERROR:", e)
 
