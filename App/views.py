@@ -77,15 +77,19 @@ def SendMail(user, template_name, email_subject, extra_context=None):
 
     html_content = render_to_string(template_name, context)
 
-    from django.core.mail import EmailMultiAlternatives
+    try:
+        msg = EmailMultiAlternatives(
+            subject=email_subject,
+            body=html_content,
+            to=[recipient_email]
+        )
 
-    msg = EmailMultiAlternatives(
-        subject=email_subject,
-        body=html_content,
-        to=[recipient_email]
-    )
-    msg.attach_alternative(html_content, "text/html")
-    msg.send()
+        msg.attach_alternative(html_content, "text/html")
+
+        msg.send(fail_silently=True)
+
+    except Exception as e:
+        print("EMAIL ERROR:", e)
 
 
 # sending otp code to the user email
