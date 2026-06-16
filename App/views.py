@@ -379,7 +379,7 @@ def UserSignup(request, subdomain=None):
             request,
             "Account created successfully"
         )
-        return redirect("memberlogin")
+        return redirect("login")
         
     # Detect organization from subdomain
     signuporg = None
@@ -392,72 +392,6 @@ def UserSignup(request, subdomain=None):
     }
 
     return render(request, "users/signup.html", context)
-
-
-# for member login
-def MemberLogin(request):
-
-    if request.method == "POST":
-        username = request.POST.get("username", "").strip()
-        password = request.POST.get("password")
-
-        user = authenticate(
-            request,
-            username=username,
-            password=password
-        )
-
-        # verifying user credentials
-        if not user:
-            messages.error(request, "Invalid username or password")
-            return redirect("memberlogin")
-
-        # Prevent superusers from using member login
-        if user.is_superuser:
-            messages.error(request, "Use admin login instead")
-            return redirect("memberlogin")
-
-        # verifying user profile and organization
-        profile = Profile.objects.filter(user=user).first()
-        if not profile:
-            messages.error(request, "Profile not found")
-            return redirect("memberlogin")
-
-        # Detect organization from subdomain
-        subdomain = GetSubdomain(request)
-
-        # Verify member belongs to current organization
-        if profile.org.subdomain != subdomain:
-            messages.error(
-                request,
-                "You do not belong to this organization"
-            )
-            return redirect("memberlogin")
-
-        # Optional: ensure org is active
-        if profile.org.status != "active":
-            messages.error(
-                request,
-                "Organization is inactive"
-            )
-            return redirect("memberlogin")
-
-        # log in the user
-        login(request, user)
-        messages.success(request, f"Welcome back {user.username}")
-        return redirect("dashboard")
-    
-    # Detect organization from subdomain
-    subdomain = GetSubdomain(request)
-    if subdomain:
-        signuporg = get_object_or_404(Org, subdomain=subdomain)
-        context = {
-            'org':signuporg,
-        }
-    else:
-        context = {}
-
-    return render(request, "users/login.html", context)
 
 
 # for inex or landing page
