@@ -243,7 +243,8 @@ def OrgSignup(request):
                     subdomain=subdomain,
                     logo=logo,
                     owner=profile,
-                    owner_number=phone
+                    owner_number=phone,
+                    plan_id=1,
                 )
 
                 # creating profile for user
