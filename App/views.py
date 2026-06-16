@@ -283,32 +283,6 @@ def OrgSignup(request):
 
 
 # function to get subdomain from request
-# def GetSubdomain(request):
-#     host = request.get_host().split(":")[0].lower()
-
-#     # remove www
-#     if host.startswith("www."):
-#         host = host[4:]
-
-#     # localhost
-#     if host in ["localhost", "127.0.0.1"]:
-#         return (
-#             request.GET.get("sub_name")
-#             or request.POST.get("sub_name")
-#         )
-
-#     # only allow your domain
-#     if not host.endswith("lostbutfound.com"):
-#         return None
-
-#     parts = host.split(".")
-
-#     # no subdomain
-#     if len(parts) < 3:
-#         return None
-
-#     return parts[0]
-
 def GetSubdomain(request):
 
     # get path
@@ -350,7 +324,7 @@ def UserSignup(request, subdomain=None):
         # verifing password
         if not password:
             messages.error(request, "You have to set a password to create an account")
-            return redirect("register")
+            return redirect("register", subdomain=subdomain)
 
         # verifying subdomain and org
         org = Org.objects.filter(subdomain=subdomain).first()
@@ -358,22 +332,22 @@ def UserSignup(request, subdomain=None):
         # verify org
         if not org:
             messages.error(request, "Invalid organization link")
-            return redirect("register")
+            return redirect("register", subdomain=subdomain)
 
         # verify status
         if org.status != "active":
             messages.error(request, "Organization is inactive")
-            return redirect("register")
+            return redirect("register", subdomain=subdomain)
 
         # verifying email
         if User.objects.filter(email=email).exists():
             messages.error(request, "Email already used")
-            return redirect("register")
+            return redirect("register", subdomain=subdomain)
 
         # verifying username
         if User.objects.filter(username=username).exists():
             messages.error(request, "Username already exists")
-            return redirect("register")
+            return redirect("register", subdomain=subdomain)
 
         # to prevent error occurance while creating account
         with transaction.atomic():
