@@ -110,10 +110,10 @@
                     </div>
                     <div class="pb-2">
                         <p class="text-xs text-blue-400 capitalize font-bold">referring link:</p>
-                        <a href="{% url 'register' %}?sub_name={{ profile.org.subdomain }}"
+                        <a href="https://lostbutfound-vvhx.onrender.com/{{ profile.org.subdomain }}/register/"
                             class="text-1xl font-bold text-blue-600"
                         >
-                            {{ request.scheme }}://{{ request.get_host }}/register/
+                            https://lostbutfound-vvhx.onrender.com/{{ profile.org.subdomain }}/register/
                             <!-- http://{{ profile.org.subdomain }}.localhost:8000/register/ -->
                         </a>
                     </div>
