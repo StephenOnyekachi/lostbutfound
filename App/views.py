@@ -209,12 +209,12 @@ def OrgSignup(request):
                 messages.error(request, "Organization name is required")
                 return redirect("signup")
             
-            # checking if email already exist
-            if User.objects.filter(email=email).exists():
-                messages.error(request, 'Email have been used, try another email')
-                return redirect("signup")
+            # # checking if email already exist
+            # if User.objects.filter(email=email).exists():
+            #     messages.error(request, 'Email have been used, try another email')
+            #     return redirect("signup")
             
-            # checking if email or username already exist
+            # checking if username already exist
             if User.objects.filter(username=username).exists():
                 messages.error(request, "Username already exists")
                 return redirect("signup")
@@ -339,10 +339,10 @@ def UserSignup(request, subdomain=None):
             messages.error(request, "Organization is inactive")
             return redirect("register", subdomain=subdomain)
 
-        # verifying email
-        if User.objects.filter(email=email).exists():
-            messages.error(request, "Email already used")
-            return redirect("register", subdomain=subdomain)
+        # # verifying email
+        # if User.objects.filter(email=email).exists():
+        #     messages.error(request, "Email already used")
+        #     return redirect("register", subdomain=subdomain)
 
         # verifying username
         if User.objects.filter(username=username).exists():
