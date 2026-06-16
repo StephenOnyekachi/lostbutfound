@@ -1,6 +1,6 @@
 
 
-# from django.contrib.auth.models import User
+from django.contrib.auth.models import User
 from django.http import HttpResponse,JsonResponse
 from django.contrib import messages
 from django.shortcuts import render, redirect, get_object_or_404, get_list_or_404
@@ -60,24 +60,6 @@ def SendEmailTask(self, subject, html, email):
     except Exception as exc:
         logger.error(f"Failed to send email to {email}: {exc}")
         raise self.retry(exc=exc, countdown=60)
-
-
-# # for sending function with redis
-# def SendMail(user, template_name, email_subject, extra_context=None):
-#     name = user.get_full_name() or user.username
-#     recipient_email = user.email
-
-#     context = {
-#         'name': name,
-#         'email': recipient_email,
-#     }
-
-#     if extra_context:
-#         context.update(extra_context)
-
-#     html_content = render_to_string(template_name, context)
-
-#     SendEmailTask.delay(email_subject, html_content, recipient_email)
 
 
 # for sending function
@@ -275,16 +257,21 @@ def OrgSignup(request):
                 )
 
             # calling sending mail functionn here after creating account
-            subject = 'Welcome to Lost But Found'
-            extra_context={
-                'org':org
-            }
-            SendMail(profile, 'extends/newOrgMail.html', subject, extra_context)
+            try:
+                subject = 'Welcome to Lost But Found'
+                extra_context = {
+                    'org': org
+                }
+                SendMail(profile, 'extends/newOrgMail.html', subject, extra_context)
+            except Exception as e:
+                print("EMAIL ERROR:", e)
 
-            messages.success(request, f'you successfully created a new account with lost but found "{org_name}"')
+            messages.success(
+                request,
+                f'you successfully created a new account with lost but found "{org_name}"'
+            )
             return redirect("login")
-        
-        messages.error(request, f'you have to set a password to create an account')
+
         return redirect("signup")
     
     return render(request,"signup.html")
@@ -370,15 +357,21 @@ def UserSignup(request):
             )
 
         # calling sending mail functionn here after creating account
-        subject = ('Welcome to', org.orgname)
-        extra_context={
-            'org':org
-        }
-        SendMail(user, 'extends/newUserMail.html.html', subject, extra_context)
+        try:
+            subject = 'Welcome to Lost But Found'
+            extra_context = {
+                'org': org
+            }
+            SendMail(profile, 'extends/newUserMail.html', subject, extra_context)
+        except Exception as e:
+            print("EMAIL ERROR:", e)
 
-        messages.success(request, "Account created successfully")
+        messages.success(
+            request,
+            "Account created successfully"
+        )
         return redirect("memberlogin")
-    
+        
     # Detect organization from subdomain
     signuporg = None
     subdomain = GetSubdomain(request)
@@ -568,6 +561,10 @@ def DeleteOrg(request, pk):
     org = get_object_or_404(Org, id=pk)
     if not profile.org or org.id != profile.org.id:
         return redirect('dashboard')
+
+    # verify before deleting
+    if request.method != "POST":
+        return redirect("dashboard")
     
     # delete org
     org.delete()
@@ -653,6 +650,13 @@ def DeleteUser(request, pk):
     if target_profile.org != profile.org:
         return redirect('dashboard')
 
+    if target_user == request.user:
+        messages.error(
+            request,
+            "You cannot delete your own account"
+        )
+        return redirect("orgusers")
+
     target_user.delete()
 
     return redirect('orgusers')
@@ -712,10 +716,15 @@ def DeleteItem(request, pk):
     org = profile.org
 
     # get item id
-    item = get_object_or_404(Item, id=pk, org=profile.org)
+    item = get_object_or_404(
+        Item,
+        id=pk,
+        org=profile.org
+    )
+
     if item.org_id != profile.org.id:
         return redirect('dashboard')
-    
+
     # delete user
     item.delete()
 
