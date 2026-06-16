@@ -279,31 +279,52 @@ def OrgSignup(request):
 
 
 # function to get subdomain from request
+# def GetSubdomain(request):
+#     host = request.get_host().split(":")[0].lower()
+
+#     # remove www
+#     if host.startswith("www."):
+#         host = host[4:]
+
+#     # localhost
+#     if host in ["localhost", "127.0.0.1"]:
+#         return (
+#             request.GET.get("sub_name")
+#             or request.POST.get("sub_name")
+#         )
+
+#     # only allow your domain
+#     if not host.endswith("lostbutfound.com"):
+#         return None
+
+#     parts = host.split(".")
+
+#     # no subdomain
+#     if len(parts) < 3:
+#         return None
+
+#     return parts[0]
+
 def GetSubdomain(request):
-    host = request.get_host().split(":")[0].lower()
 
-    # remove www
-    if host.startswith("www."):
-        host = host[4:]
+    # get path
+    path_parts = request.path.strip("/").split("/")
 
-    # localhost
-    if host in ["localhost", "127.0.0.1"]:
-        return (
-            request.GET.get("sub_name")
-            or request.POST.get("sub_name")
-        )
+    # example:
+    # /stephenorg/register/
+    # path_parts = ['stephenorg', 'register']
 
-    # only allow your domain
-    if not host.endswith("lostbutfound.com"):
-        return None
+    if len(path_parts) > 1:
+        return path_parts[0]
 
-    parts = host.split(".")
+    # fallback for localhost testing
+    if request.method == "GET":
+        return request.GET.get("sub_name")
 
-    # no subdomain
-    if len(parts) < 3:
-        return None
+    if request.method == "POST":
+        return request.POST.get("sub_name")
 
-    return parts[0]
+    return None
 
 
 # for user signup with org link

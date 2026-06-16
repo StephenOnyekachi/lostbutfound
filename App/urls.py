@@ -6,7 +6,7 @@ urlpatterns = [
     path('', views.Index, name='index'),
     path('login/', views.UserLogin, name='login'),
     path('signup/', views.OrgSignup, name='signup'),
-    path('register/', views.UserSignup, name='register'),
+    path('<str:subdomain>/register/', views.UserSignup, name='register'),
     path('memberlogin/', views.MemberLogin, name='memberlogin'),
     path('logout/', views.UserLogout, name='logout'),
 
