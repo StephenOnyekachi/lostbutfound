@@ -86,7 +86,7 @@ def SendMail(user, template_name, email_subject, extra_context=None):
 
         msg.attach_alternative(html_content, "text/html")
 
-        msg.send(fail_silently=True)
+        msg.send(fail_silently=False)
 
     except Exception as e:
         print("EMAIL ERROR:", e)
