@@ -177,14 +177,14 @@ USE_TZ = True
 
 # with env activated
 EMAIL_BACKEND = "django.core.mail.backends.smtp.EmailBackend"
-EMAIL_HOST = os.environ.get("EMAIL_HOST")
-EMAIL_PORT = int(os.environ.get("EMAIL_PORT", 465))
+EMAIL_HOST = os.getenv("EMAIL_HOST", "smtp.resend.com")
+EMAIL_PORT = int(os.getenv("EMAIL_PORT", 465))
 EMAIL_USE_TLS = False
 EMAIL_USE_SSL = True
-EMAIL_HOST_USER = "resend" if not os.environ.get("EMAIL_HOST_USER") else os.environ.get("EMAIL_HOST_USER")
-EMAIL_HOST_PASSWORD = os.environ.get("EMAIL_HOST_PASSWORD")
+EMAIL_HOST_USER = os.getenv("EMAIL_HOST_USER", "resend")
+EMAIL_HOST_PASSWORD = os.getenv("EMAIL_HOST_PASSWORD")
 EMAIL_TIMEOUT = 60
-DEFAULT_FROM_EMAIL = "noreply@yourdomain.com"  # or your verified domain email
+DEFAULT_FROM_EMAIL = os.getenv("DEFAULT_FROM_EMAIL", "onboarding@resend.dev")
 
 
 # redis cache configuration
