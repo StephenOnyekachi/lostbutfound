@@ -68,8 +68,8 @@ def SendMail(user, template_name, email_subject, extra_context=None):
     recipient_email = user.email
 
     context = {
-        'name': name,
-        'email': recipient_email,
+        "name": name,
+        "email": recipient_email,
     }
 
     if extra_context:
@@ -81,15 +81,18 @@ def SendMail(user, template_name, email_subject, extra_context=None):
         msg = EmailMultiAlternatives(
             subject=email_subject,
             body=html_content,
-            to=[recipient_email]
+            from_email=settings.DEFAULT_FROM_EMAIL,
+            to=[recipient_email],
         )
 
         msg.attach_alternative(html_content, "text/html")
 
-        msg.send(fail_silently=False)
+        result = msg.send(fail_silently=False)
+
+        print("EMAIL SENT:", result)
 
     except Exception as e:
-        print("EMAIL ERROR:", e)
+        print("EMAIL ERROR:", str(e))
 
 
 # sending otp code to the user email
