@@ -177,14 +177,14 @@ USE_TZ = True
 
 # with env activated
 EMAIL_BACKEND = "django.core.mail.backends.smtp.EmailBackend"
-EMAIL_HOST = "smtp.render.com"
+EMAIL_HOST = "smtp.resend.com"
 EMAIL_PORT = 587
 EMAIL_USE_TLS = True
 EMAIL_USE_SSL = False
-EMAIL_HOST_USER = os.environ.get("EMAIL_HOST_USER")
+EMAIL_HOST_USER = "resend" if not os.environ.get("EMAIL_HOST_USER") else os.environ.get("EMAIL_HOST_USER")
 EMAIL_HOST_PASSWORD = os.environ.get("EMAIL_HOST_PASSWORD")
 EMAIL_TIMEOUT = 60
-DEFAULT_FROM_EMAIL = "lostbutfound-vvhx.onrender.com"
+DEFAULT_FROM_EMAIL = EMAIL_HOST_USER
 
 
 # redis cache configuration
