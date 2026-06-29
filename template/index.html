@@ -20,8 +20,18 @@
             <div
                 class="py-5 flex gap-5"
             >
-                <a href="{% url 'login' %}" class="text-blue-800 capitalize font-bold">login</a>
-                <a href="{% url 'signup' %}" class="text-blue-800 capitalize font-bold">create organization</a>
+                <a href="{% url 'login' %}" 
+                    class="py-2 px-2 capitalize text-white bg-blue-800 rounded
+                    backdrop-blur-md hover:bg-gray-400 hover:text-white transition duration-300"
+                >
+                    login
+                </a>
+                <a href="{% url 'signup' %}"
+                    class="py-2 px-2 capitalize text-white bg-blue-800 rounded
+                    backdrop-blur-md hover:bg-gray-400 hover:text-white transition duration-300"
+                >
+                    create organization
+                </a>
             </div>
         </div>
         <div class="w-full md:w-[250px] py-5">

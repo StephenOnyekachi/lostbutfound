@@ -183,7 +183,7 @@ EMAIL_USE_TLS = True
 EMAIL_USE_SSL = False
 EMAIL_HOST_USER = os.getenv("EMAIL_HOST_USER", "resend")
 EMAIL_HOST_PASSWORD = os.getenv("EMAIL_HOST_PASSWORD")
-EMAIL_TIMEOUT = 120
+EMAIL_TIMEOUT = 15
 DEFAULT_FROM_EMAIL = os.getenv("DEFAULT_FROM_EMAIL", "onboarding@resend.dev")
 
 
@@ -235,6 +235,7 @@ STATICFILES_STORAGE = "whitenoise.storage.CompressedManifestStaticFilesStorage"
 LOGIN_URL = '/login/'  # where unauthenticated users go
 LOGIN_REDIRECT_URL = '/dashboard/'  # where users go after login
 
+# Logging configuration
 LOGGING = {
     'version': 1,
     'disable_existing_loggers': False,

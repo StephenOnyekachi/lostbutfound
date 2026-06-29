@@ -20,6 +20,7 @@ from django.core.cache import cache
 # for emails
 from django.core.mail import EmailMultiAlternatives
 from django.template.loader import render_to_string
+import threading
 from celery import shared_task
 
 # Create your views here.
@@ -77,22 +78,27 @@ def SendMail(user, template_name, email_subject, extra_context=None):
 
     html_content = render_to_string(template_name, context)
 
-    try:
-        msg = EmailMultiAlternatives(
-            subject=email_subject,
-            body=html_content,
-            from_email=settings.DEFAULT_FROM_EMAIL,
-            to=[recipient_email],
-        )
+    def send_mail():
+        try:
+            msg = EmailMultiAlternatives(
+                subject=email_subject,
+                body=html_content,
+                from_email=settings.DEFAULT_FROM_EMAIL,
+                to=[recipient_email],
+            )
 
-        msg.attach_alternative(html_content, "text/html")
+            msg.attach_alternative(html_content, "text/html")
 
-        result = msg.send(fail_silently=False)
+            result = msg.send(fail_silently=False)
 
-        print("EMAIL SENT:", result)
+            print("EMAIL SENT:", result)
 
-    except Exception as e:
-        print("EMAIL ERROR:", str(e))
+        except Exception as e:
+            print("EMAIL ERROR:", str(e))
+
+    threading.Thread(
+        target=send_mail
+    ).start()
 
 
 # sending otp code to the user email
